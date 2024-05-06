@@ -14,7 +14,7 @@ For the tasks in planning phase, all members should write their own requirements
 Coding and testing tasks will be distributed between all members based on preference. 
 
 Every week we should aim to have two meetings. One on discord and one in-person. On discord should be Monday and in person should be on Fridays at 1pm to 2pm. 
-The outcomes of the meeting should be documented in a word document by one person. This where delays on the tasks should be reported and should be posted on discord, as well as the issue tracking.
+The outcomes of the meeting should be documented in a markdown file by one person. This where delays on the tasks should be reported and should be posted on discord, as well as the issue tracking.
 Gitlab will be used as a repository for code and documentation and the issue tracking system will be used when needed. Java will be the language used for coding.
 
 
