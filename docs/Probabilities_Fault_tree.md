@@ -1,7 +1,7 @@
 Probability assumptions:
 
 Fault tree#1
-
+![[diagrams/FaultTree1.png]]
 P(CALC-ERR) = 0.01
 
 P(INC-LOGIC) = 0.002
@@ -17,7 +17,7 @@ P(COM-FAIL) = 1-(1-0.04)\* (1-0.06) ≈ 0.0976
 P(AUTOPILOT-SYS-FAIL) = 1-(1-0.0298) \* (1-0.0976) ≈ 0.124
 
 Fault tree#2
-
+![[diagrams/FaultTree2.png]]
 P(INC-INTERP-PROTO) = 0.04
 
 P(BUF-OVERFLO) = 0.05
