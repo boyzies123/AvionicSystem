@@ -114,6 +114,6 @@ public class SensorData {
     public double getEngineParams() {
         return engineParams;
     }
-    
+
     /* Getter method section END */
 }
