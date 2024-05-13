@@ -28,3 +28,14 @@
 - Create state diagram
 - Create traceability matrix
 - Start coding by Monday at the latest to allow as much testing time as possible
+
+## Minutes for Team Meeting on 13/05/2024
+
+
+#### Meeting Place: Online via Discord
+
+
+### Objectives for the week ahead
+
+- Create core system and UI components ready for testing ASAP
+- Begin building test infrastructure
