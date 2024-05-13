@@ -14,6 +14,7 @@ public class SensorData {
     private double engineParams;
 
     /* Setter method section START */
+
     /**
      * Setter method for altitude
      * @param altitude
@@ -61,9 +62,11 @@ public class SensorData {
     public void setEngineParams(double engineParams) {
         this.engineParams = engineParams;
     }
+
     /* Setter method section END */
 
     /* Getter method section START */
+
     /**
      * Getter method for alutitude
      * @return
@@ -96,6 +99,10 @@ public class SensorData {
         return roll;
     }
 
+    /**
+     * Getter method for air speed
+     * @return
+     */
     public double getAirSpeed() {
         return airSpeed;
     }
@@ -107,5 +114,6 @@ public class SensorData {
     public double getEngineParams() {
         return engineParams;
     }
+    
     /* Getter method section END */
 }
