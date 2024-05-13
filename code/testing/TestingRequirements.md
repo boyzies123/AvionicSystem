@@ -39,7 +39,10 @@ SensorDataDisplay:
 ### Ensure Connecting systems are receving and delivering data correctly:
 
 AirspeedSensor, AltitudeSensor, AttitudeSensor:
-opperating on a 2oo3 redundancy architecture and is functioning correctly
+- opperating on a 2oo3 redundancy architecture and is functioning correctly
+
+SensorDataDisplay:
+- update indecators are opperating at correct intervals
 
 ## Auto Pilot
 
@@ -70,6 +73,15 @@ ControlSurface:
 
 ### Ensure Connecting systems are receving and delivering data correctly:
 
+Control Signal:
+- confirm recieved control signal within 200 milliseconds
+- +-2% for control surface margin of error
+- +-5% for engine margin of error
+- reflects this change within 1 second of issuance
+- The system should attempt this up to 3 times before alerting the UI of the issue
+
+Control Frequency:
+- confirm sending control signals every 500 milliseconds
 
 ## UI
 
