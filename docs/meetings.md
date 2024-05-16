@@ -39,3 +39,21 @@
 
 - Create core system and UI components ready for testing ASAP
 - Begin building test infrastructure
+
+## Minutes for Team Meeting on 17/05/2024
+
+
+#### Meeting Place: In person, CO236
+
+
+### Tasks Achieved in the Past Week
+
+- Finished the traceability matrix (Yi)
+- Finished UML Diagrams (Yi, Harry and James)
+- Started work on core system functionality (Yi, Harry and Mason)
+- Created basic UI (James and Yi)
+
+### Objectives for the days until next meeting
+
+- Finish core functionality to be ready for testing ASAP
+- Start the testing phase
