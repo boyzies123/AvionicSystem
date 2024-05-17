@@ -21,6 +21,10 @@ public class Engine {
         sD.setEngineParams(currThrust);
     }
 
+    public boolean checkThrust() {
+        return currThrust <= MAX_THRUST && currThrust >= MIN_THRUST;
+    }
+
     /* Setter method section START */
 
     /**
