@@ -21,8 +21,8 @@ public class AltitudeSensor {
      * @param sD
      */
     public void sendSensorData(SensorData sD) {
-        sD.setAltitudeGPS = currAltitudeGPS;
-        sD.setAltitudeBarometric = currAltitudeBarometric;
+        sD.setAltitudeGPS(currAltitudeGPS);
+        sD.setAltitudeBarometric(currAltitudeBarometric);
     }
 
     /**
