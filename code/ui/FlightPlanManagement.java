@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import code.src.Waypoint;
+
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
@@ -15,7 +17,7 @@ import javax.swing.JTextField;
  */
 public class FlightPlanManagement extends JPanel{
 
-    //private Waypoint[] waypoints;
+    private Waypoint[] waypoints;
     //private Map<Waypoint, Double> speedRestrictions;
     //private Waypoint[] waypoints;
     private JTextField waypointField;

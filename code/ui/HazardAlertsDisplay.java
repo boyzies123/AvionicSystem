@@ -12,6 +12,11 @@ import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
+/*
+ * Code made by: James McKenzie
+ * Date created: 13/05/2024
+ * Date modified: (if modified)
+ */
 public class HazardAlertsDisplay extends JPanel{
 
     private List<String> hazardWarnings;

@@ -9,6 +9,11 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JToggleButton;
 
+/*
+ * Code made by: James McKenzie
+ * Date created: 13/05/2024
+ * Date modified: (if modified)
+ */
 public class SensorDataDisplay extends JPanel{
 
     private double airspeed;

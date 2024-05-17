@@ -10,6 +10,12 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+
+/*
+ * Code made by: James McKenzie
+ * Date created: 13/05/2024
+ * Date modified: (if modified)
+ */
 public class AutopilotControlPanel extends JPanel{
 
     private boolean autopilotStatus;
