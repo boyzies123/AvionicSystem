@@ -1,7 +1,7 @@
 /*
  * Code made by: Harry Booth-Beach
  * Date created: 13/05/2024
- * Date modified: 13/05/2024
+ * Date modified: 17/05/2024
  */
 package code.sensor;
 
@@ -10,7 +10,7 @@ public class SensorData {
     private double pitch;
     private double roll;
     private double yaw;
-    private double airSpeed;
+    private double airspeed;
     private double engineParams;
 
     /* Setter method section START */
@@ -49,10 +49,10 @@ public class SensorData {
 
     /**
      * Setter method for air speed
-     * @param airSpeed
+     * @param airspeed
      */
-    public void setAirSpeed(double airSpeed) {
-        this.airSpeed = airSpeed;
+    public void setAirspeed(double airspeed) {
+        this.airspeed = airspeed;
     }
 
     /**
@@ -103,8 +103,8 @@ public class SensorData {
      * Getter method for air speed
      * @return
      */
-    public double getAirSpeed() {
-        return airSpeed;
+    public double getAirspeed() {
+        return airspeed;
     }
 
     /**
