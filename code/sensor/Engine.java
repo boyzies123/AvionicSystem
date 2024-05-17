@@ -1,5 +1,5 @@
 /*
- * Code made by: Harry Booth-Beach
+ * Code made by: Harry Booth-Beach, with modifications by: Yi Chen
  * Date created: 13/05/2024
  * Date modified: 17/05/2024
  */
@@ -10,9 +10,12 @@ public class Engine {
     private double currThrust;
     private double MAX_THRUST;
     private double MIN_THRUST;
-    private double  fuelFlow;
+    private double fuelFlow;
     private int engineID;
-
+    public Engine(double currentThrust, double fuelFlow){
+        currThrust = currentThrust;
+        this.fuelFlow = fuelFlow;
+    }
     /**
      * Sends the sensor data to the SensorData class
      * @param sD
