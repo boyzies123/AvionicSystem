@@ -1,11 +1,11 @@
 /*
- * Code made by: Harry Booth-Beach
+ * Code made by: Harry Booth-Beach, with modifications by: Yi Chen
  * Date created: 17/05/2024
  * Date modified: 17/05/2024
  */
 package code.sensor;
 
-public AttitudeSensor {
+public AttitudeSensor implements Sensor{
     private int updateFreq;
     private double currPitch;
     private double currRoll;
@@ -18,14 +18,17 @@ public AttitudeSensor {
     private double MIN_YAW;
     private int attitudeSensorID;
 
+    public AttitudeSensor(double currentPitch, double currentYaw, double currentRoll){
+        currPitch = currentPitch;
+        currYaw = currentYaw;
+        currRoll = currentRoll;
+    }
     /**
      * Sends data to SensorData class
-     * @param sD
      */
-    public void sendSensorData(SensorData sD) {
-        sD.setPitch(currPitch);
-        sD.setRoll(currRoll);
-        sD.setYaw(currYaw);
+    @Override
+    public SensorData sendSensorData(){
+        return new SensorData(currPitch, currRoll, currYaw);
     }
 
     /**
