@@ -6,7 +6,8 @@
 package code.sensor;
 
 public class SensorData {
-    private double altitude;
+    private double altitudeGPS;
+    private double altitudeBarometric;
     private double pitch;
     private double roll;
     private double yaw;
@@ -16,11 +17,19 @@ public class SensorData {
     /* Setter method section START */
 
     /**
-     * Setter method for altitude
-     * @param altitude
+     * Setter method for altitude GPS
+     * @param altitudeGPS
      */
-    public void setAltitude(double altitude) {
-        this.altitude = altitude;
+    public void setAltitudeGPS(double altitudeGPS) {
+        this.altitudeGPS = altitudeGPS;
+    }
+
+    /**
+     * Setter method for altitude barometric
+     * @param altitudeBarometric
+     */
+    public void setAltitudeBarometric(double altitudeBarometric) {
+        this.altitudeBarometric = altitudeBarometric;
     }
 
     /**
@@ -68,11 +77,19 @@ public class SensorData {
     /* Getter method section START */
 
     /**
-     * Getter method for alutitude
+     * Getter method for alutitude GPS
      * @return
      */
-    public double getAltitude() {
-        return altitude;
+    public double getAltitudeGPS() {
+        return altitudeGPS;
+    }
+
+    /**
+     * Getter method for alutitude GPS
+     * @return
+     */
+    public double getAltitudeBarometric() {
+        return altitudeBarometric;
     }
 
     /**

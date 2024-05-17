@@ -7,8 +7,6 @@ package code.sensor;
 
 public class AltitudeSensor {
     private int updateFreq;
-    private boolean isGPS;
-    private boolean isBarometric;
     private double currAltitudeGPS;
     private double currAltitudeBarometric;
     private double MAX_ALTITUDE_GPS;
@@ -18,47 +16,13 @@ public class AltitudeSensor {
     private double altitudeSensorID;
 
     /**
-     * Returns true if altitude being measured in GPS
-     * @return
-     */
-    public boolean isGPS() {
-        return isGPS;
-    }
-
-    /**
-     * Returns true if altitude is being measured in barometric
-     * @return
-     */
-    public boolean isBarometric() {
-        return isBarometric;
-    }
-
-    /**
-     * Sets altitude measurement to GPS
-     */
-    public void setModeGPS() {
-        isGPS = true;
-        isBarometric = false;
-    }
-
-    /**
-     * Sets altitude mode to Barometric
-     */
-    public void setModeBarometric() {
-        isGPS = false;
-        isBarometric = true;
-    }
-
-    /**
      * Sends the sensor data to the SensorData class
      * Value is GPS if isGPS is true, barometric otherwise
      * @param sD
      */
     public void sendSensorData(SensorData sD) {
-        if (this.isGPS()) {
-            sD.setAltitude(currAltitudeGPS);
-        }
-        sD.setAltitude(currAltitudeBarometric);
+        sD.setAltitudeGPS = currAltitudeGPS;
+        sD.setAltitudeBarometric = currAltitudeBarometric;
     }
 
     /**
