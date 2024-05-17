@@ -1,5 +1,5 @@
 /*
- * Code made by: Harry Booth-Beach
+ * Code made by: Harry Booth-Beach, Yi Chen
  * Date created: 13/05/2024
  * Date modified: 17/05/2024
  */
@@ -11,9 +11,23 @@ public class SensorData {
     private double pitch;
     private double roll;
     private double yaw;
-    private double airspeed;
-    private double engineParams;
-
+    private double fuelFlow;
+    private double thrust;
+    /**
+     * SensorData constructor for sensor data produced by attitude sensor
+     */
+    public SensorData(double pitch, double roll, double yaw){
+        this.roll = roll;
+        this.yaw = yaw;
+        this.pitch = pitch;
+    }
+    /**
+     * SensorData constructor for sensor data for engine parameters
+     */
+    public SensorData(double fuelFlow, double thrust){
+        this.fuelFlow = fuelFlow;
+        this.thrust = thrust;
+    }
     /* Setter method section START */
 
     /**
@@ -65,11 +79,18 @@ public class SensorData {
     }
 
     /**
-     * Setter method for engine parameters
-     * @param engineParams
+     * Setter method for fuelflow
+     * @param fuelFlow
      */
-    public void setEngineParams(double engineParams) {
-        this.engineParams = engineParams;
+    public void setfuelFlow(double fuelFlow) {
+        this.fuelFlow = fuelFlow;
+    }
+    /**
+     * Setter method for fuelflow
+     * @param thrust
+     */
+    public void setThrust(double thrust) {
+        this.thrust = thrust;
     }
 
     /* Setter method section END */
@@ -125,11 +146,18 @@ public class SensorData {
     }
 
     /**
-     * Getter method for engine parameters (thrust)
+     * Getter method for thrust
      * @return
      */
-    public double getEngineParams() {
-        return engineParams;
+    public double getThrust() {
+        return thrust;
+    }
+    /**
+     * Getter method for fuel flow
+     * @return
+     */
+    public double getFuelFlow() {
+        return fuelFlow;
     }
 
     /* Getter method section END */
