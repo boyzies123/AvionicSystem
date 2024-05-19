@@ -1,7 +1,7 @@
 /*
  * Code made by: Harry Booth-Beach, with modifications by: Yi Chen
  * Date created: 17/05/2024
- * Date modified: 17/05/2024
+ * Date modified: 19/05/2024
  */
 package code.sensor;
 
@@ -10,12 +10,12 @@ public AttitudeSensor implements Sensor{
     private double currPitch;
     private double currRoll;
     private double currYaw;
-    private double MAX_PITCH;
-    private double MIN_PITCH;
-    private double MAX_ROLL;
-    private double MIN_ROLL;
-    private double MAX_YAW;
-    private double MIN_YAW;
+    private double MAX_PITCH = 30;
+    private double MIN_PITCH = -30;
+    private double MAX_ROLL = -60;
+    private double MIN_ROLL = 60;
+    private double MAX_YAW = 180;
+    private double MIN_YAW = -180;
     private int attitudeSensorID;
 
     public AttitudeSensor(double currentPitch, double currentYaw, double currentRoll){
