@@ -12,8 +12,8 @@ public AttitudeSensor implements Sensor{
     private double currYaw;
     private double MAX_PITCH = 30;
     private double MIN_PITCH = -30;
-    private double MAX_ROLL = -60;
-    private double MIN_ROLL = 60;
+    private double MAX_ROLL = 60;
+    private double MIN_ROLL = -60;
     private double MAX_YAW = 180;
     private double MIN_YAW = -180;
     private int attitudeSensorID;
