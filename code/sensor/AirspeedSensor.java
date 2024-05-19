@@ -1,15 +1,15 @@
 /*
- * Code made by: Harry Booth-Beach
+ * Code made by: Harry Booth-Beach, with modifications by Yi Chen
  * Date created: 17/05/2024
- * Date modified: 17/05/2024
+ * Date modified: 19/05/2024
  */
 package code.sensor;
 
 public class AirspeedSensor {
     private int updateFreq;
     private double currAirspeed;
-    private double MAX_SPEED;
-    private double MIN_SPEED;
+    private static double MIN_SPEED = 50;
+    private static double MAX_SPEED = 500;
     private double airspeedSensorID;
 
     /**
@@ -20,14 +20,7 @@ public class AirspeedSensor {
         sD.setAirspeed(currAirspeed);
     }
 
-    /**
-     * Returns true if airspeed is less or equal to max
-     * and more than or equal to min
-     * @return
-     */
-    public boolean checkAirspeed() {
-        return this.airspeed <= MAX_SPEED && this.airspeed >= MIN_SPEED;
-    }
+   
 
     /**
      * Setter method for current airspeed
@@ -43,6 +36,20 @@ public class AirspeedSensor {
      */
     public double getCurrAirspeed() {
         return currAirspeed;
+    }
+    /**
+     * Getter method for the max speed 
+     * @return
+     */
+    public static double getMaxSpeed(){
+        return MAX_SPEED;
+    }
+    /**
+     * Getter method for the min speed
+     * @return
+     */
+    public static double getMinSpeed(){
+        return MIN_SPEED;
     }
 
 
