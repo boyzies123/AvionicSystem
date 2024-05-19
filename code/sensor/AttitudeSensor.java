@@ -10,12 +10,12 @@ public AttitudeSensor implements Sensor{
     private double currPitch;
     private double currRoll;
     private double currYaw;
-    private double MAX_PITCH = 30;
-    private double MIN_PITCH = -30;
-    private double MAX_ROLL = 60;
-    private double MIN_ROLL = -60;
-    private double MAX_YAW = 180;
-    private double MIN_YAW = -180;
+    private static double MAX_PITCH = 30;
+    private static double MIN_PITCH = -30;
+    private static double MAX_ROLL = 60;
+    private static double MIN_ROLL = -60;
+    private static double MAX_YAW = 180;
+    private static double MIN_YAW = -180;
     private int attitudeSensorID;
 
     public AttitudeSensor(double currentPitch, double currentYaw, double currentRoll){
@@ -47,13 +47,7 @@ public AttitudeSensor implements Sensor{
         return currRoll <= MAX_ROLL && currRoll >= MIN_ROLL;
     }
 
-    /**
-     * Returns true if yaw is valid
-     * @return
-     */
-    public boolean checkYaw() {
-        return currYaw <= MAX_YAW && currYaw >= MIN_YAW;
-    }
+    
 
     /* Setter method section START */
 
@@ -107,6 +101,48 @@ public AttitudeSensor implements Sensor{
      */
     public double getCurrYaw() {
         return currYaw;
+    }
+    /**
+     * Getter method for the max yaw
+     * @return
+     */
+    public static double getMaxYaw(){
+        return MAX_YAW;
+    }
+    /**
+     * Getter method for the max roll
+     * @return
+     */
+    public static double getMaxRoll(){
+        return MAX_YAW;
+    }
+    /**
+     * Getter method for the max pitch
+     * @return
+     */
+    public static double getMaxPitch(){
+        return MAX_PITCH;
+    }
+    /**
+     * Getter method for the min yaw
+     * @return
+     */
+    public static double getMinYaw(){
+        return MIN_YAW;
+    }
+    /**
+     * Getter method for the min roll
+     * @return
+     */
+    public static double getMinRoll(){
+        return MIN_ROLL;
+    }
+    /**
+     * Getter method for the min pitch
+     * @return
+     */
+    public static double getMinPitch(){
+        return MIN_PITCH;
     }
 
     /* Getter method section END */
