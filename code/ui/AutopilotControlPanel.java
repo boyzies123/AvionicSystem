@@ -14,7 +14,7 @@ import javax.swing.JToggleButton;
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: (if modified)
+ * Date modified: 20/05/2024
  */
 public class AutopilotControlPanel extends JPanel{
 
@@ -56,6 +56,8 @@ public class AutopilotControlPanel extends JPanel{
     }
 
     public void engageAutoPilot(){
+        // start autopilot
+        
 
     }
 

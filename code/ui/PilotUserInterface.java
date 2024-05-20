@@ -7,7 +7,7 @@ import java.awt.*;
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: (if modified)
+ * Date modified: 20/05/2024
  */
 public class PilotUserInterface extends JFrame{
 
@@ -22,14 +22,15 @@ public class PilotUserInterface extends JFrame{
         
         // Initialize components
 
-        initializeVisualDisplayMap();
+        //initializeVisualDisplayMap();
+        //this.mapPanel = new MapDisplay();
         
         // Add components to the frame
-        add(new FlightPlanManagement(), BorderLayout.NORTH);
+        add(new FlightPlanManagement(this), BorderLayout.NORTH);
         add(new AutopilotControlPanel(), BorderLayout.WEST);
-        add(new SensorDataDisplay(), BorderLayout.CENTER);
+        add(new MapDisplay(), BorderLayout.CENTER);
         add(new HazardAlertsDisplay(), BorderLayout.SOUTH);
-        add(mapPanel, BorderLayout.EAST);
+        add(new SensorDataDisplay(), BorderLayout.EAST);
         
         pack();
         setVisible(true);
@@ -41,6 +42,10 @@ public class PilotUserInterface extends JFrame{
         mapPanel.setBorder(BorderFactory.createTitledBorder("Visual Display Map"));
         // Add map drawing functionality
     }
+
+    /**public MapDisplay getMapDisplay(){
+        return this.mapPanel;
+    }**/
     
     public static void main(String[] args) {
         SwingUtilities.invokeLater(PilotUserInterface::new);

@@ -16,7 +16,7 @@ import code.src.Waypoint;
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: (if modified)
+ * Date modified: 20/05/2024
  */
 public class FlightPlanManagement extends JPanel{
 
@@ -29,8 +29,12 @@ public class FlightPlanManagement extends JPanel{
     private JTextField etaField;
     private JButton submitButton;
     private JButton setFlightPlanButton;
+    private final int MIN_WAYPOINTS = 2;
+    private final int MAX_WAYPOINTS = 8;
+    private int attempts = 0;
+    private PilotUserInterface parentFrame;
 
-    public FlightPlanManagement(){
+    public FlightPlanManagement(PilotUserInterface parent){
         super(new FlowLayout());
         waypointXField = new JTextField(10);
         waypointYField = new JTextField(10);
@@ -38,10 +42,11 @@ public class FlightPlanManagement extends JPanel{
         etaField = new JTextField(10);
         submitButton = new JButton("Submit");
         setFlightPlanButton = new JButton("Set Flight Plan");
+        parentFrame = parent;
 
         // Add action listeners for buttons
         submitButton.addActionListener(e -> submitDetails());
-        // setFlightPlanButton.addActionListener(e -> loadFlightPlan());
+        setFlightPlanButton.addActionListener(e -> loadFlightPlan());
 
         setBorder(BorderFactory.createTitledBorder("Flight Plan Management"));
         add(new JLabel("Waypoint - X-position"));
@@ -59,15 +64,28 @@ public class FlightPlanManagement extends JPanel{
     }
 
     public void submitDetails(){
-        double xPos = Double.parseDouble(waypointXField.getText());
-        double yPos = Double.parseDouble(waypointYField.getText());
-        double speedRes = Double.parseDouble(speedField.getText());
-        double eta = Double.parseDouble(etaField.getText());
-        Waypoint waypoint = new Waypoint(xPos, yPos, speedRes, eta);
-        waypoints.add(waypoint);
+        if (attempts <= MAX_WAYPOINTS){
+            double xPos = Double.parseDouble(waypointXField.getText());
+            double yPos = Double.parseDouble(waypointYField.getText());
+            double speedRes = Double.parseDouble(speedField.getText());
+            double eta = Double.parseDouble(etaField.getText());
+            Waypoint waypoint = new Waypoint(xPos, yPos, speedRes, eta);
+            waypoints.add(waypoint);
+
+            waypointXField.setText("");
+            waypointYField.setText("");
+            speedField.setText("");
+            etaField.setText("");
+        }
+        attempts++;
     }
 
     public void loadFlightPlan(){
+        if (waypoints.size() >= MIN_WAYPOINTS){
+            //parentFrame.getMapDisplay().setWaypoints(waypoints);
+            submitButton.setEnabled(false);
+            setFlightPlanButton.setEnabled(false);
+        }
 
     }
 }
