@@ -24,6 +24,9 @@ public class AutopilotControlPanel{
     private double heading;
     private boolean faultStatus;
 
+    private static AutoPilotSystem autoPilotSystem;
+    private static AutoPilotSystem backupAutoPilotSystem;
+
     private static JPanel panel;
     private static JButton autopilotButton;
     private static JToggleButton manualOverrideButton;
@@ -60,14 +63,22 @@ public class AutopilotControlPanel{
         return panel;
     }
 
-    public static void engageAutoPilot(){
+    public static void addAutoPilotSystem(AutoPilotSystem aps, AutoPilotSystem baps){
+        autoPilotSystem = aps;
+        backupAutoPilotSystem = baps;
+    }
+
+    public void engageAutoPilot(){
         // start autopilot
-        
+        autoPilotSystem.start();
+        backupAutoPilotSystem.start();
+        // make the button green
 
     }
 
-    public static void disengageAutoPilot(){
-        
+    public void disengageAutoPilot(){
+        autoPilotSystem.stop();
+        backupAutoPilotSystem.stop();
     }
 
     public static void adjustAltitude(double altitude){
