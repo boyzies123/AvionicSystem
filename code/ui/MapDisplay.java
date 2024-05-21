@@ -15,62 +15,53 @@ import code.src.Waypoint;
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: 20/05/2024
- * 
- * MAP SHIT GOES HERE
+ * Date modified: 22/05/2024
  */
-public class MapDisplay extends JPanel{
+public class MapDisplay{
     // Coordinates for the current position
-    private int currentX;
-    private int currentY;
-    private List<Waypoint> waypoints;
-    private BufferedImage mapImage;
+    private static MapPanel panel;
 
-    public MapDisplay() {
+    public static final int STARTX = 100;
+    public static final int STARTY = 100;
+
+    private static int currentX;
+    private static int currentY;
+    private static List<Waypoint> waypoints;
+
+    public static void initialize() {
         // Initialize variables
-        currentX = 100;
-        currentY = 100;
-        try {                
-            mapImage = ImageIO.read(new File("\\C:\\Users\\jjmck\\avionics-system\\code\\ui\\mapImage.PNG\""));
-         } catch (IOException ex) {
-              System.err.println("File reading failed");
-         }
-
+        currentX = STARTX;
+        currentY = STARTY;
         waypoints = new ArrayList<Waypoint>();
+        panel = new MapPanel(currentX, currentY, waypoints);
 
     }
 
-    public void setCurrentPosition(int x, int y) {
+    public static MapPanel getPanel() {
+        return panel;
+    }
+
+    /**
+     * For debugging purposes
+     */
+    public static void displayWaypoints(){
+        if (waypoints.size() != 0){
+            System.out.println(waypoints);
+        }
+        else{
+            System.out.println("No waypoints");
+        }
+    }
+
+    public static void setCurrentPosition(int x, int y) {
         currentX = x;
         currentY = y;
-        repaint(); // Redraw the panel after updating position
+        panel.setCurrentPosition(x, y);
     }
 
-    public void setWaypoints(List<Waypoint> waypoints) {
-        this.waypoints = waypoints;
-        repaint();
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        // Draw map image
-        g.setColor(Color.BLUE);
-        g.fillRect(0, 0, getWidth(), getHeight());
-
-        // Draw current position
-        g.setColor(Color.RED);
-        g.fillOval(currentX - 5, currentY - 5, 10, 10);
-
-        // Draw planned route (if waypoints are added)
-        if (waypoints.size() > 0) {
-            g.setColor(Color.RED);
-            for (int i = 0; i < waypoints.size() - 1; i++) {
-                g.drawLine((int)waypoints.get(i).getxPos(), (int)waypoints.get(i).getyPos(), (int)waypoints.get(i+1).getxPos(), (int)waypoints.get(i+1).getyPos());
-            }
-        }
-        
+    public static void setWaypoints(List<Waypoint> w) {
+        waypoints = w;
+        panel.setWaypoints(w);
     }
 
     

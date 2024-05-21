@@ -16,54 +16,60 @@ import code.src.Waypoint;
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: 20/05/2024
+ * Date modified: 22/05/2024
  */
 public class FlightPlanManagement extends JPanel{
 
-    private List<Waypoint> waypoints;
+    private static List<Waypoint> waypoints;
     private Map<Waypoint, Double> speedRestrictions;
     //private Waypoint[] waypoints;
-    private JTextField waypointXField;
-    private JTextField waypointYField;
-    private JTextField speedField;
-    private JTextField etaField;
-    private JButton submitButton;
-    private JButton setFlightPlanButton;
-    private final int MIN_WAYPOINTS = 2;
-    private final int MAX_WAYPOINTS = 8;
-    private int attempts = 0;
-    private PilotUserInterface parentFrame;
+    private static JPanel panel;
 
-    public FlightPlanManagement(PilotUserInterface parent){
-        super(new FlowLayout());
+
+    private static JTextField waypointXField;
+    private static JTextField waypointYField;
+    private static JTextField speedField;
+    private static JTextField etaField;
+    private static JButton submitButton;
+    private static JButton setFlightPlanButton;
+    private final static int MIN_WAYPOINTS = 2;
+    private final static int MAX_WAYPOINTS = 8;
+    private static int attempts = 0;
+
+    public static void initialize(){
+        panel = new JPanel(new FlowLayout());
         waypointXField = new JTextField(10);
         waypointYField = new JTextField(10);
         speedField = new JTextField(5);
         etaField = new JTextField(10);
         submitButton = new JButton("Submit");
         setFlightPlanButton = new JButton("Set Flight Plan");
-        parentFrame = parent;
 
         // Add action listeners for buttons
         submitButton.addActionListener(e -> submitDetails());
         setFlightPlanButton.addActionListener(e -> loadFlightPlan());
 
-        setBorder(BorderFactory.createTitledBorder("Flight Plan Management"));
-        add(new JLabel("Waypoint - X-position"));
-        add(waypointXField);
-        add(new JLabel("Waypoint - Y-position"));
-        add(waypointYField);
-        add(new JLabel("Speed:"));
-        add(speedField);
-        add(new JLabel("ETA:"));
-        add(etaField);
-        add(submitButton);
-        add(setFlightPlanButton);
+        panel.setBorder(BorderFactory.createTitledBorder("Flight Plan Management"));
+        panel.add(new JLabel("Waypoint - X-position"));
+        panel.add(waypointXField);
+        panel.add(new JLabel("Waypoint - Y-position"));
+        panel.add(waypointYField);
+        panel.add(new JLabel("Speed:"));
+        panel.add(speedField);
+        panel.add(new JLabel("ETA:"));
+        panel.add(etaField);
+        panel.add(submitButton);
+        panel.add(setFlightPlanButton);
 
         waypoints = new ArrayList<Waypoint>();
+        waypoints.add(new Waypoint(MapDisplay.STARTX, MapDisplay.STARTY, 0, 0));
     }
 
-    public void submitDetails(){
+    public static JPanel getPanel() {
+        return panel;
+    }
+
+    public static void submitDetails(){
         if (attempts <= MAX_WAYPOINTS){
             double xPos = Double.parseDouble(waypointXField.getText());
             double yPos = Double.parseDouble(waypointYField.getText());
@@ -71,6 +77,8 @@ public class FlightPlanManagement extends JPanel{
             double eta = Double.parseDouble(etaField.getText());
             Waypoint waypoint = new Waypoint(xPos, yPos, speedRes, eta);
             waypoints.add(waypoint);
+            MapDisplay.setWaypoints(waypoints);
+            MapDisplay.displayWaypoints();
 
             waypointXField.setText("");
             waypointYField.setText("");
@@ -80,7 +88,7 @@ public class FlightPlanManagement extends JPanel{
         attempts++;
     }
 
-    public void loadFlightPlan(){
+    public static void loadFlightPlan(){
         if (waypoints.size() >= MIN_WAYPOINTS){
             //parentFrame.getMapDisplay().setWaypoints(waypoints);
             submitButton.setEnabled(false);

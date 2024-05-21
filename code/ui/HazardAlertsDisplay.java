@@ -15,18 +15,20 @@ import javax.swing.JToggleButton;
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: (if modified)
+ * Date modified: 22/05/2024
  */
-public class HazardAlertsDisplay extends JPanel{
+public class HazardAlertsDisplay{
 
+
+    private static JPanel panel;
     private List<String> hazardWarnings;
     // private Checklist emergencyChecklist;
 
-    private JLabel hazardAlertLabel;
-    private JTextArea emergencyActionPlan;
+    private static JLabel hazardAlertLabel;
+    private static JTextArea emergencyActionPlan;
 
-    public HazardAlertsDisplay(){
-        super(new GridLayout(2,1));
+    public static void initialize(){
+        panel = new JPanel(new GridLayout(2,1));
         hazardAlertLabel = new JLabel("No hazards detected");
         emergencyActionPlan = new JTextArea(5, 20);
         emergencyActionPlan.setEditable(false);
@@ -36,23 +38,27 @@ public class HazardAlertsDisplay extends JPanel{
         // Add action listeners for buttons
         // autopilotButton.addActionListener(e -> engageAutoPilot());
 
-        setBorder(BorderFactory.createTitledBorder("Hazard Alerts"));
-        add(hazardAlertLabel);
-        add(new JScrollPane(emergencyActionPlan));
+        panel.setBorder(BorderFactory.createTitledBorder("Hazard Alerts"));
+        panel.add(hazardAlertLabel);
+        panel.add(new JScrollPane(emergencyActionPlan));
     }
 
-    public void displayChecklist(){
+    public static JPanel getPanel() {
+        return panel;
+    }
+
+    public static void displayChecklist(){
 
     }
 
-    public void issueHazardAlert(){
+    public static void issueHazardAlert(){
         
     }
 
-    public void triggerAudibleAlert(){
+    public static void triggerAudibleAlert(){
         
     }
-    public void visualAlert(){
+    public static void visualAlert(){
         
     }
     

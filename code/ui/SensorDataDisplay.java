@@ -23,15 +23,17 @@ public class SensorDataDisplay extends JPanel{
     private double yaw;
     private double thrust;
 
-    private JLabel airspeedLabel;
-    private JLabel altitudeLabel;
-    private JLabel pitchLabel;
-    private JLabel rollLabel;
-    private JLabel yawLabel;
-    private JLabel engineLabel;
 
-    public SensorDataDisplay(){
-        super(new GridLayout(6,1));
+    private static JPanel panel;
+    private static JLabel airspeedLabel;
+    private static JLabel altitudeLabel;
+    private static JLabel pitchLabel;
+    private static JLabel rollLabel;
+    private static JLabel yawLabel;
+    private static JLabel engineLabel;
+
+    public static void initialize(){
+        panel = new JPanel(new GridLayout(6,1));
         airspeedLabel = new JLabel("Airspeed: ");
         altitudeLabel = new JLabel("Altitude: ");
         pitchLabel = new JLabel("Pitch: ");
@@ -42,70 +44,74 @@ public class SensorDataDisplay extends JPanel{
         // Add action listeners for buttons
         // autopilotButton.addActionListener(e -> engageAutoPilot());
 
-        setBorder(BorderFactory.createTitledBorder("Sensor Data Display"));
-        add(airspeedLabel);
-        add(altitudeLabel);
-        add(pitchLabel);
-        add(rollLabel);
-        add(yawLabel);
-        add(engineLabel);
+        panel.setBorder(BorderFactory.createTitledBorder("Sensor Data Display"));
+        panel.add(airspeedLabel);
+        panel.add(altitudeLabel);
+        panel.add(pitchLabel);
+        panel.add(rollLabel);
+        panel.add(yawLabel);
+        panel.add(engineLabel);
     }
 
-    public void setUpdateFrequency(){
+    public static JPanel getPanel() {
+        return panel;
+    }
+
+    public static void setUpdateFrequency(){
 
     }
 
-    public void updateAirspeed(double airspeed){
+    public static void updateAirspeed(double airspeed){
         
     }
 
-    public void updateAltitude(double altitude){
+    public static void updateAltitude(double altitude){
         
     }
 
-    public void updatePitch(double pitch){
+    public static void updatePitch(double pitch){
         
     }
-    public void updateRoll(double roll){
-        
-    }
-
-    public void updateYaw(double yaw){
+    public static void updateRoll(double roll){
         
     }
 
-    public void updateThrust(double thrust){
+    public static void updateYaw(double yaw){
         
     }
 
-    public void displayAirspeed(){
+    public static void updateThrust(double thrust){
         
     }
 
-    public void displayAltitude(){
+    public static void displayAirspeed(){
         
     }
 
-    public void displayPitch(){
-        
-    }
-    public void displayRoll(){
+    public static void displayAltitude(){
         
     }
 
-    public void displayYaw(){
+    public static void displayPitch(){
+        
+    }
+    public static void displayRoll(){
         
     }
 
-    public void displayThrust(){
+    public static void displayYaw(){
         
     }
 
-    public void displayIndicator(){
+    public static void displayThrust(){
         
     }
 
-    public void colorChange(String color){
+    public static void displayIndicator(){
+        
+    }
+
+    public static void colorChange(String color){
 
     }
 

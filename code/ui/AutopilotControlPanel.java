@@ -14,9 +14,9 @@ import javax.swing.JToggleButton;
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: 20/05/2024
+ * Date modified: 22/05/2024
  */
-public class AutopilotControlPanel extends JPanel{
+public class AutopilotControlPanel{
 
     private boolean autopilotStatus;
     private double altitude;
@@ -24,15 +24,16 @@ public class AutopilotControlPanel extends JPanel{
     private double heading;
     private boolean faultStatus;
 
-    private JButton autopilotButton;
-    private JToggleButton manualOverrideButton;
-    private JSlider altitudeSlider;
-    private JSlider speedSlider;
-    private JSlider headingSlider;
-    private JLabel autopilotStatusLabel;
+    private static JPanel panel;
+    private static JButton autopilotButton;
+    private static JToggleButton manualOverrideButton;
+    private static JSlider altitudeSlider;
+    private static JSlider speedSlider;
+    private static JSlider headingSlider;
+    private static JLabel autopilotStatusLabel;
 
-    public AutopilotControlPanel(){
-        super(new GridLayout(6,1));
+    public static void initialize(){
+        panel = new JPanel(new GridLayout(6,1));
         autopilotButton = new JButton("Engage Autopilot");
         manualOverrideButton = new JToggleButton("Manual Override");
         altitudeSlider = new JSlider(JSlider.VERTICAL, -1000, 50000, 0);
@@ -43,45 +44,49 @@ public class AutopilotControlPanel extends JPanel{
         // Add action listeners for buttons
         // autopilotButton.addActionListener(e -> engageAutoPilot());
 
-        setBorder(BorderFactory.createTitledBorder("Autopilot Control Panel"));
-        add(autopilotButton);
-        add(manualOverrideButton);
-        add(new JLabel("Altitude:"));
-        add(altitudeSlider);
-        add(new JLabel("Speed:"));
-        add(speedSlider);
-        add(new JLabel("Heading:"));
-        add(headingSlider);
-        add(autopilotStatusLabel);
+        panel.setBorder(BorderFactory.createTitledBorder("Autopilot Control Panel"));
+        panel.add(autopilotButton);
+        panel.add(manualOverrideButton);
+        panel.add(new JLabel("Altitude:"));
+        panel.add(altitudeSlider);
+        panel.add(new JLabel("Speed:"));
+        panel.add(speedSlider);
+        panel.add(new JLabel("Heading:"));
+        panel.add(headingSlider);
+        panel.add(autopilotStatusLabel);
     }
 
-    public void engageAutoPilot(){
+    public static JPanel getPanel(){
+        return panel;
+    }
+
+    public static void engageAutoPilot(){
         // start autopilot
         
 
     }
 
-    public void disengageAutoPilot(){
+    public static void disengageAutoPilot(){
         
     }
 
-    public void adjustAltitude(double altitude){
+    public static void adjustAltitude(double altitude){
         
     }
 
-    public void adjustSpeed(double speed){
+    public static void adjustSpeed(double speed){
         
     }
 
-    public void adjustHeading(double heading){
+    public static void adjustHeading(double heading){
         
     }
 
-    public String getAutopilotStatus(){
+    public static String getAutopilotStatus(){
         return "";
     }
 
-    public void displayIndicatorLights(){
+    public static void displayIndicatorLights(){
 
     }
     
