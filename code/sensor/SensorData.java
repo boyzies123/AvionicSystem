@@ -1,18 +1,24 @@
 /*
  * Code made by: Harry Booth-Beach, with modifications by: Yi Chen
  * Date created: 13/05/2024
- * Date modified: 17/05/2024
+ * Date modified: 22/05/2024
  */
 package code.sensor;
 
 public class SensorData {
-    private double altitudeGPS;
-    private double altitudeBarometric;
+    private double altitude;
     private double pitch;
     private double roll;
     private double yaw;
-    private double fuelFlow;
-    private double thrust;
+    private double airspeed;
+    private double fuelFlow1;
+    private double fuelFlow2;
+    private double thrust1;
+    private double thrust2;
+    private double altitudeGPS;
+    private double altitudeBarometric;
+
+    
     /**
      * SensorData constructor for sensor data produced by attitude sensor
      */
@@ -24,9 +30,11 @@ public class SensorData {
     /**
      * SensorData constructor for sensor data for engine parameters
      */
-    public SensorData(double fuelFlow, double thrust){
-        this.fuelFlow = fuelFlow;
-        this.thrust = thrust;
+    public SensorData(double fuelFlow1, double thrust1, double fuelFlow2, double thrust2){
+        this.fuelFlow1 = fuelFlow1;
+        this.thrust1 = thrust1;
+        this.fuelFlow2 = fuelFlow2;
+        this.thrust2 = thrust2;
     }
     /* Setter method section START */
 
