@@ -30,16 +30,22 @@ public class SensorDataDisplay extends JPanel{
     private static JLabel pitchLabel;
     private static JLabel rollLabel;
     private static JLabel yawLabel;
-    private static JLabel engineLabel;
+    private static JLabel engineLabel1;
+    private static JLabel engineLabel2;
+    private static JLabel fuelLabel1;
+    private static JLabel fuelLabel2;
 
     public static void initialize(){
-        panel = new JPanel(new GridLayout(6,1));
+        panel = new JPanel(new GridLayout(9,1));
         airspeedLabel = new JLabel("Airspeed: ");
         altitudeLabel = new JLabel("Altitude: ");
         pitchLabel = new JLabel("Pitch: ");
         rollLabel = new JLabel("Roll: ");
         yawLabel = new JLabel("Yaw: ");
-        engineLabel = new JLabel("Thrust: ");
+        engineLabel1 = new JLabel("Engine 1 Thrust: ");
+        engineLabel2 = new JLabel("Engine 2 Thrust: ");
+        fuelLabel1 = new JLabel("Engine 1 Fuel Flow: ");
+        fuelLabel2 = new JLabel("Engine 2 Fuel Flow: ");
 
         // Add action listeners for buttons
         // autopilotButton.addActionListener(e -> engageAutoPilot());
@@ -50,7 +56,10 @@ public class SensorDataDisplay extends JPanel{
         panel.add(pitchLabel);
         panel.add(rollLabel);
         panel.add(yawLabel);
-        panel.add(engineLabel);
+        panel.add(engineLabel1);
+        panel.add(engineLabel2);
+        panel.add(fuelLabel1);
+        panel.add(fuelLabel2);
     }
 
     public static JPanel getPanel() {
@@ -80,7 +89,19 @@ public class SensorDataDisplay extends JPanel{
         
     }
 
-    public static void updateThrust(double thrust){
+    public static void updateThrust1(double thrust){
+        
+    }
+
+    public static void updateThrust2(double thrust){
+        
+    }
+
+    public static void updateFuel1(double fuelFlow){
+        
+    }
+
+    public static void updateFuel2(double fuelFlow){
         
     }
 
