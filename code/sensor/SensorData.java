@@ -36,22 +36,12 @@ public class SensorData {
         this.fuelFlow2 = fuelFlow2;
         this.thrust2 = thrust2;
     }
-    /* Setter method section START */
-
     /**
-     * Setter method for altitude GPS
-     * @param altitudeGPS
+     * Setter method for altitude
+     * @param altitude
      */
-    public void setAltitudeGPS(double altitudeGPS) {
-        this.altitudeGPS = altitudeGPS;
-    }
-
-    /**
-     * Setter method for altitude barometric
-     * @param altitudeBarometric
-     */
-    public void setAltitudeBarometric(double altitudeBarometric) {
-        this.altitudeBarometric = altitudeBarometric;
+    public void setAltitude(double altitude) {
+        this.altitude = altitude;
     }
 
     /**
@@ -80,25 +70,54 @@ public class SensorData {
 
     /**
      * Setter method for air speed
-     * @param airspeed
+     * @param airSpeed
      */
     public void setAirspeed(double airspeed) {
         this.airspeed = airspeed;
     }
 
     /**
-     * Setter method for fuelflow
+     * Setter method for fuelflow of engine 1
      * @param fuelFlow
      */
-    public void setfuelFlow(double fuelFlow) {
-        this.fuelFlow = fuelFlow;
+    public void setfuelFlow1(double fuelFlow1) {
+        this.fuelFlow1 = fuelFlow1;
     }
     /**
-     * Setter method for fuelflow
+     * Setter method for thrust of engine 1
      * @param thrust
      */
-    public void setThrust(double thrust) {
-        this.thrust = thrust;
+    public void setThrust1(double thrust1) {
+        this.thrust1 = thrust1;
+    }
+    /**
+     * Setter method for fuel flow of engine 2
+     * @param thrust
+     */
+    public void setFuelFlow2(double fuelFlow2){
+        this.fuelFlow2 = fuelFlow2;
+    }
+    /**
+     * Setter method for thrust of engine 2
+     * @param thrust
+     */
+    public void setThrust2(double thrust2){
+        this.thrust2 = thrust2;
+    }
+    /**
+     * Setter method for altitude GPS
+     * @param altitudeGPS
+     */
+    public void setAltitudeGPS(double altitudeGPS) {
+        this.altitudeGPS = altitudeGPS;
+    }
+
+    /**
+     * Setter method for altitude barometric
+     * @param altitudeBarometric
+     */
+    public void setAltitudeBarometric(double altitudeBarometric) {
+        this.altitudeBarometric = altitudeBarometric;
     }
 
     /* Setter method section END */
@@ -106,8 +125,76 @@ public class SensorData {
     /* Getter method section START */
 
     /**
+     * Getter method for alutitude
+     * @return the altitude reported by sensor
+     */
+    public double getAltitude() {
+        return altitude;
+    }
+
+    /**
+     * Getter method for pitch
+     * @return the pitch reported by sensor
+     */
+    public double getPitch() {
+        return pitch;
+    }
+
+    /**
+     * Getter method for yaw
+     * @return the yaw reported by sensor
+     */
+    public double getYaw() {
+        return yaw;
+    }
+
+    /**
+     * Getter method for roll
+     * @return the roll reported by sensor
+     */
+    public double getRoll() {
+        return roll;
+    }
+
+    /**
+     * Getter method for air speed
+     * @return the airspeed reported by sensor
+     */
+    public double getAirspeed() {
+        return airspeed;
+    }
+
+    /**
+     * Getter method for thrust of engine 1
+     * @return the thrust of first engine reported by engine
+     */
+    public double getThrust1() {
+        return thrust1;
+    }
+    /**
+     * Getter method for thrust of engine 2
+     * @return the thrust of second engine reported by engine
+     */
+    public double getThrust2() {
+        return thrust2;
+    }
+    /**
+     * Getter method for fuel flow of engine 1
+     * @return the fuel flow of first engine reported by engine
+     */
+    public double getFuelFlow1() {
+        return fuelFlow1;
+    }
+    /**
+     * Getter method for fuel flow of engine 2
+     * @return the fuel flow of second engine reported by engine
+     */
+    public double getFuelFlow2() {
+        return fuelFlow2;
+    }
+    /**
      * Getter method for alutitude GPS
-     * @return
+     * @return 
      */
     public double getAltitudeGPS() {
         return altitudeGPS;
@@ -121,52 +208,6 @@ public class SensorData {
         return altitudeBarometric;
     }
 
-    /**
-     * Getter method for pitch
-     * @return
-     */
-    public double getPitch() {
-        return pitch;
-    }
-
-    /**
-     * Getter method for yaw
-     * @return
-     */
-    public double getYaw() {
-        return yaw;
-    }
-
-    /**
-     * Getter method for roll
-     * @return
-     */
-    public double getRoll() {
-        return roll;
-    }
-
-    /**
-     * Getter method for air speed
-     * @return
-     */
-    public double getAirspeed() {
-        return airspeed;
-    }
-
-    /**
-     * Getter method for thrust
-     * @return
-     */
-    public double getThrust() {
-        return thrust;
-    }
-    /**
-     * Getter method for fuel flow
-     * @return
-     */
-    public double getFuelFlow() {
-        return fuelFlow;
-    }
 
     /* Getter method section END */
 }
