@@ -1,9 +1,9 @@
 /*
  * Code made by: Harry Booth-Beach, with modifications by: Yi Chen
  * Date created: 13/05/2024
- * Date modified: 22/05/2024
+ * Date modified: 16/05/2024
  */
-package code.sensor;
+package sensor;
 
 public class SensorData {
     private double altitude;
@@ -18,7 +18,9 @@ public class SensorData {
     private double altitudeGPS;
     private double altitudeBarometric;
 
-    
+    public SensorData() {
+    	
+    }
     /**
      * SensorData constructor for sensor data produced by attitude sensor
      */
@@ -36,6 +38,9 @@ public class SensorData {
         this.fuelFlow2 = fuelFlow2;
         this.thrust2 = thrust2;
     }
+    
+    /* Setter method section START */
+
     /**
      * Setter method for altitude
      * @param altitude
@@ -129,7 +134,7 @@ public class SensorData {
      * @return the altitude reported by sensor
      */
     public double getAltitude() {
-        return altitude;
+        return this.altitude;
     }
 
     /**
@@ -137,7 +142,7 @@ public class SensorData {
      * @return the pitch reported by sensor
      */
     public double getPitch() {
-        return pitch;
+        return this.pitch;
     }
 
     /**
@@ -145,7 +150,7 @@ public class SensorData {
      * @return the yaw reported by sensor
      */
     public double getYaw() {
-        return yaw;
+        return this.yaw;
     }
 
     /**
@@ -153,7 +158,7 @@ public class SensorData {
      * @return the roll reported by sensor
      */
     public double getRoll() {
-        return roll;
+        return this.roll;
     }
 
     /**
@@ -161,7 +166,7 @@ public class SensorData {
      * @return the airspeed reported by sensor
      */
     public double getAirspeed() {
-        return airspeed;
+        return this.airspeed;
     }
 
     /**
@@ -169,35 +174,35 @@ public class SensorData {
      * @return the thrust of first engine reported by engine
      */
     public double getThrust1() {
-        return thrust1;
+        return this.thrust1;
     }
     /**
      * Getter method for thrust of engine 2
      * @return the thrust of second engine reported by engine
      */
     public double getThrust2() {
-        return thrust2;
+        return this.thrust2;
     }
     /**
      * Getter method for fuel flow of engine 1
      * @return the fuel flow of first engine reported by engine
      */
     public double getFuelFlow1() {
-        return fuelFlow1;
+        return this.fuelFlow1;
     }
     /**
      * Getter method for fuel flow of engine 2
      * @return the fuel flow of second engine reported by engine
      */
     public double getFuelFlow2() {
-        return fuelFlow2;
+        return this.fuelFlow2;
     }
     /**
      * Getter method for alutitude GPS
      * @return 
      */
     public double getAltitudeGPS() {
-        return altitudeGPS;
+        return this.altitudeGPS;
     }
 
     /**
@@ -205,7 +210,7 @@ public class SensorData {
      * @return
      */
     public double getAltitudeBarometric() {
-        return altitudeBarometric;
+        return this.altitudeBarometric;
     }
 
 
