@@ -3,7 +3,7 @@
  * Date created: 13/05/2024
  * Date modified: 16/05/2024
  */
-package sensor;
+package code.sensor;
 
 public class SensorData {
     private double altitude;
