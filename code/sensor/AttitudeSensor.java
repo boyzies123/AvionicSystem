@@ -1,4 +1,4 @@
-package sensor;
+package code.sensor;
 /*
  * Code made by: Harry Booth-Beach, with modifications by Yi Chen
  * Date created: 16/05/2024
@@ -25,15 +25,7 @@ public class AttitudeSensor extends Sensor{
     public SensorData sendSensorData(){
         return new SensorData(this.currPitch, this.currRoll, this.currYaw);
     }
-    // @Override
-    // public void monitor() {
-    //     throw new UnsupportedOperationException("Unimplemented method 'monitor'");
-    // }
-    // @Override
-    // public void reportError(String err) {
-    //     throw new UnsupportedOperationException("Unimplemented method 'reportError'");
-    // }
-   
+
 
    
 
