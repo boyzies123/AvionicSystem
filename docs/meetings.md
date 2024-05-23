@@ -57,3 +57,21 @@
 
 - Finish core functionality to be ready for testing ASAP
 - Start the testing phase
+
+## Minutes for Team Meeting on 20/05/2024
+
+
+#### Meeting Place: Online via Discord
+
+
+### Tasks Achieved cince Last Meeting
+
+- Began work on testing infrastructure (Harry and Mason)
+- Continued building the UNI (James)
+- Finished core system functionality (Yi)
+- Finished sensors (Harry and Mason)
+
+### Objectives for the days until next meeting
+
+- Continue to work on testing infrastructure and carry out tests
+- Integrate all the components
