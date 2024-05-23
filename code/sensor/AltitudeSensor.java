@@ -3,7 +3,7 @@
  * Date created: 17/05/2024
  * Date modified: 17/05/2024
  */
-package sensor;
+package code.sensor;
 
 public class AltitudeSensor extends Sensor{
     private long updateFreq;
