@@ -1,4 +1,4 @@
-package autopilot;
+package code.autopilot;
 
 
 import sensor.SensorData;
