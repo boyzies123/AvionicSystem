@@ -3,45 +3,33 @@
  * Date created: 17/05/2024
  * Date modified: 17/05/2024
  */
-package code.sensor;
+package sensor;
 
-public class AltitudeSensor {
-    private int updateFreq;
+public class AltitudeSensor extends Sensor{
+    private long updateFreq;
     private double currAltitudeGPS;
     private double currAltitudeBarometric;
-    private double MAX_ALTITUDE_GPS;
-    private double MIN_ALTITUDE_GPS;
-    private double MAX_ALTITUDE_BAROMETRIC;
-    private double MIN_ALTITUDE_BAROMETRIC;
-    private double altitudeSensorID;
-
+    private static double MIN_ALTITUDE;
+    private static double MAX_ALTITUDE;
+    public AltitudeSensor(double currAltitudeGPS, double currAltitudeBarometric) {
+    	super(500);
+    	this.currAltitudeBarometric = currAltitudeBarometric;
+    	this.currAltitudeGPS = currAltitudeGPS;
+    }
     /**
      * Sends the sensor data to the SensorData class
      * Value is GPS if isGPS is true, barometric otherwise
      * @param sD
      */
-    public void sendSensorData(SensorData sD) {
-        sD.setAltitudeGPS(currAltitudeGPS);
-        sD.setAltitudeBarometric(currAltitudeBarometric);
+    public SensorData sendSensorData() {
+        SensorData sensorData = new SensorData();
+        sensorData.setAltitudeGPS(this.currAltitudeGPS);
+        sensorData.setAltitudeGPS(this.currAltitudeBarometric);
+        return sensorData;
+        
     }
 
-    /**
-     * Returns true if altitude is less or equal to max
-     * and more than or equal to min
-     * @return
-     */
-    public boolean checkAltitudeGPS() {
-        return this.currAltitudeGPS <= MAX_ALTITUDE_GPS && this.currAltitudeGPS >= MIN_ALTITUDE_GPS;
-    }
-
-    /**
-     * Returns true if altitude is less or equal to max
-     * and more than or equal to min
-     * @return
-     */
-    public boolean checkAltitudeBarometric() {
-        return this.currAltitudeBarometric <= MAX_ALTITUDE_BAROMETRIC && this.currAltitudeBarometric >= MIN_ALTITUDE_BAROMETRIC;
-    }
+    
 
     /* Setter method section START */
 
@@ -70,16 +58,44 @@ public class AltitudeSensor {
      * @return
      */
     public double getCurrAltitudeGPS() {
-        return currAltitudeGPS;
+        return this.currAltitudeGPS;
     }
 
+    /**
+     * Getter method for average of the two altitudes
+     * @return
+     */
+    public double getCombinedAltitude() {
+        return (this.currAltitudeBarometric + this.currAltitudeGPS) / 2;
+    }
     /**
      * Getter method for current altitude barometric
      * @return
      */
     public double getCurrAltitudeBarometric() {
-        return currAltitudeBarometric;
+        return this.currAltitudeBarometric;
     }
-
+    /**
+     * Getter update frequency of sensor
+     * @return
+     */
+    @Override
+    public long getUpdateFrequency() {
+        return this.updateFreq;
+    }
+    /**
+     * Getter method for maximum altitude
+     * @return
+     */
+    public static double getMaxAltitude() {
+        return MAX_ALTITUDE;
+    }
+    /**
+     * Getter method for minimum altitude
+     * @return
+     */
+    public static double getMinAltitude() {
+        return MIN_ALTITUDE;
+    }
     /* Getter method section END */
 }
