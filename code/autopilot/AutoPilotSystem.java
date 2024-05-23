@@ -5,8 +5,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import sensor.SensorData;
-import ui.HazardAlertsDisplay;
+import code.sensor.SensorData;
+import code.ui.HazardAlertsDisplay;
 /*
  * Code made by: Yi Chen
  * Date created: 13/05/2024
