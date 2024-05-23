@@ -1,4 +1,4 @@
-package sensor;
+package code.sensor;
 
 public class Engine {
     private double currThrust;
