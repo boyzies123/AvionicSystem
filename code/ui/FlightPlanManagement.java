@@ -93,6 +93,7 @@ public class FlightPlanManagement extends JPanel{
             //parentFrame.getMapDisplay().setWaypoints(waypoints);
             submitButton.setEnabled(false);
             setFlightPlanButton.setEnabled(false);
+            AutopilotControlPanel.enableControls();
         }
 
     }
