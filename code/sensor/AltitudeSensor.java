@@ -75,14 +75,7 @@ public class AltitudeSensor extends Sensor{
     public double getCurrAltitudeBarometric() {
         return this.currAltitudeBarometric;
     }
-    /**
-     * Getter update frequency of sensor
-     * @return
-     */
-    @Override
-    public long getUpdateFrequency() {
-        return this.updateFreq;
-    }
+    
     /**
      * Getter method for maximum altitude
      * @return
