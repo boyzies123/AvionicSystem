@@ -23,6 +23,7 @@ public class Simulator {
     private List<Instance> altitudeData;
     private List<Instance> attitudeData;
     private List<Instance> engineData;
+    private CoreSystem cS;
 
     public Simulator() {
         airspeedData = new  ArrayList<>();
@@ -30,7 +31,7 @@ public class Simulator {
         attitudeData = new  ArrayList<>();
         engineData = new  ArrayList<>(); 
 
-        CoreSystem cS = new CoreSystem();
+        cS = new CoreSystem();
     }
 
     /**
@@ -94,5 +95,8 @@ public class Simulator {
         sim.altitudeData = readData("data/altitude/" + altitudeFile, sim);
         sim.attitudeData = readData("data/attitude/" + attitudeFile, sim);
         sim.engineData = readData("data/engine/" + engineFile, sim);
+
+        // Start simulator running
+        sim.cS.start();
     }
 }
