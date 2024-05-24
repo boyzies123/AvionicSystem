@@ -11,6 +11,8 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
+import code.autopilot.AutoPilotSystem;
+
 
 /*
  * Code made by: James McKenzie
@@ -25,8 +27,8 @@ public class AutopilotControlPanel{
     private double heading;
     private boolean faultStatus;
 
-    //private static AutoPilotSystem autoPilotSystem;
-    //private static AutoPilotSystem backupAutoPilotSystem;
+    private static AutoPilotSystem autoPilotSystem;
+    private static AutoPilotSystem backupAutoPilotSystem;
 
     private static JPanel panel;
     private static JButton autopilotButton;
@@ -77,16 +79,16 @@ public class AutopilotControlPanel{
         headingSlider.setEnabled(true);
     }
 
-    /**public static void addAutoPilotSystem(AutoPilotSystem aps, AutoPilotSystem baps){
+    public static void addAutoPilotSystem(AutoPilotSystem aps, AutoPilotSystem baps){
         autoPilotSystem = aps;
         backupAutoPilotSystem = baps;
-    }**/
+    }
 
     public static void engageAutoPilot(){
         autopilotButton.setBackground(Color.GREEN);
         // start autopilot
-        //autoPilotSystem.start();
-        //backupAutoPilotSystem.start();
+        autoPilotSystem.start();
+        backupAutoPilotSystem.start();
         // make the button green
         autopilotButton.setEnabled(false);
         manualOverrideButton.setEnabled(true);
@@ -98,8 +100,8 @@ public class AutopilotControlPanel{
     }
 
     public static void disengageAutoPilot(){
-        //autoPilotSystem.stop();
-        //backupAutoPilotSystem.stop();
+        autoPilotSystem.stop();
+        backupAutoPilotSystem.stop();
         autopilotButton.setEnabled(true);
         autopilotButton.setBackground(null);
         manualOverrideButton.setEnabled(false);

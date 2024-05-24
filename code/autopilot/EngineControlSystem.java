@@ -1,8 +1,8 @@
 package code.autopilot;
 
 
-import sensor.SensorData;
-import sensor.Engine;
+import code.sensor.SensorData;
+import code.sensor.Engine;
 /*
  * Code made by: Yi Chen
  * Date created: 13/05/2024
