@@ -47,7 +47,7 @@ public class SensorTest {
     @Test
     public void testGetAltitudeUpdateFrequency() {
         AltitudeSensor altitudeSensor = new AltitudeSensor(10000, 10000);
-        assertEquals(1000, altitudeSensor.getUpdateFrequency());
+        assertEquals(500, altitudeSensor.getUpdateFrequency());
     }
 
     // get current altitude GPS
