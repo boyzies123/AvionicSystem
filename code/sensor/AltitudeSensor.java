@@ -24,7 +24,7 @@ public class AltitudeSensor extends Sensor{
     public SensorData sendSensorData() {
         SensorData sensorData = new SensorData();
         sensorData.setAltitudeGPS(this.currAltitudeGPS);
-        sensorData.setAltitudeGPS(this.currAltitudeBarometric);
+        sensorData.setAltitudeBarometric(this.currAltitudeBarometric);
         return sensorData;
         
     }
