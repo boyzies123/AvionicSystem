@@ -111,6 +111,8 @@ public class AutopilotControlPanel{
         autopilotStatusLabel.setText("Autopilot: Disgaged");
     }
 
+    
+
     public static void adjustAltitude(double altitude){
         
     }

@@ -21,6 +21,7 @@ import code.src.Waypoint;
 public class FlightPlanManagement extends JPanel{
 
     private static List<Waypoint> waypoints;
+
     private Map<Waypoint, Double> speedRestrictions;
     //private Waypoint[] waypoints;
     private static JPanel panel;
@@ -67,6 +68,10 @@ public class FlightPlanManagement extends JPanel{
 
     public static JPanel getPanel() {
         return panel;
+    }
+
+    public static List<Waypoint> getWaypoints() {
+        return waypoints;
     }
 
     public static void submitDetails(){
