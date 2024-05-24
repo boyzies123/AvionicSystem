@@ -15,7 +15,7 @@ public class EngineControlSystem {
     //thrust and fuel flow of engine two
     private double thrustTwo;
     private double fuelFlowTwo;
-    private Engine [] engines;
+    private Engine [] engines = new Engine[2];
     private SensorData sensorData;
     /**
     * Creates an engine control system object

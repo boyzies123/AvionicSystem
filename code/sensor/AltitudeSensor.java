@@ -9,8 +9,8 @@ public class AltitudeSensor extends Sensor{
     private long updateFreq;
     private double currAltitudeGPS;
     private double currAltitudeBarometric;
-    private static double MIN_ALTITUDE;
-    private static double MAX_ALTITUDE;
+    private static double MIN_ALTITUDE = -1000;
+    private static double MAX_ALTITUDE = 50000;
     public AltitudeSensor(double currAltitudeGPS, double currAltitudeBarometric) {
     	super(500);
     	this.currAltitudeBarometric = currAltitudeBarometric;
@@ -75,14 +75,7 @@ public class AltitudeSensor extends Sensor{
     public double getCurrAltitudeBarometric() {
         return this.currAltitudeBarometric;
     }
-    /**
-     * Getter update frequency of sensor
-     * @return
-     */
-    @Override
-    public long getUpdateFrequency() {
-        return this.updateFreq;
-    }
+    
     /**
      * Getter method for maximum altitude
      * @return
