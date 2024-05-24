@@ -9,7 +9,6 @@ public class AirspeedSensor extends Sensor{
     private double currentAirspeed;
     private static double MIN_SPEED = 50;
     private static double MAX_SPEED = 500;
-    private double airspeedId;
     public AirspeedSensor() {
     	super(1000);
         this.currentAirspeed = MIN_SPEED;
@@ -30,7 +29,7 @@ public class AirspeedSensor extends Sensor{
    
     public SensorData sendSensorData(){
         SensorData s = new SensorData();
-        s.setAirspeed(this.airspeedId);
+        s.setAirspeed(this.currentAirspeed);
         return s;
     }
 }
