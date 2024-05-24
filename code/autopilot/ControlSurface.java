@@ -3,9 +3,9 @@ package code.autopilot;
 import java.util.ArrayList;
 import java.util.List;
 
-import sensor.SensorData;
-import sensor.AttitudeSensor;
-import sensor.Sensor;
+import code.sensor.SensorData;
+import code.sensor.AttitudeSensor;
+import code.sensor.Sensor;
 /*
  * Code made by: Yi Chen
  * Date created: 13/05/2024

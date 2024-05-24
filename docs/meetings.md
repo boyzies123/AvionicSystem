@@ -64,10 +64,10 @@
 #### Meeting Place: Online via Discord
 
 
-### Tasks Achieved cince Last Meeting
+### Tasks Achieved since Last Meeting
 
 - Began work on testing infrastructure (Harry and Mason)
-- Continued building the UNI (James)
+- Continued building the UI (James)
 - Finished core system functionality (Yi)
 - Finished sensors (Harry and Mason)
 
@@ -75,3 +75,21 @@
 
 - Continue to work on testing infrastructure and carry out tests
 - Integrate all the components
+
+## Minutes for Team Meeting on 24/05/2024
+
+
+#### Meeting Place: In-person, CO236
+
+
+### Tasks Achieved since Last Meeting
+
+- Continued work on testing infrastructure (Harry and Mason)
+- Continued building the UI (James)
+- Finished core system functionality (Yi)
+- Finished sensors (Harry and Mason)
+
+### Objectives for the days until next meeting
+
+- Continue to work on testing infrastructure and carry out necessary tests
+- This will be the last meeting before critique writing starts

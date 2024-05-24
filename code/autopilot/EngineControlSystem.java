@@ -1,8 +1,8 @@
 package code.autopilot;
 
 
-import sensor.SensorData;
-import sensor.Engine;
+import code.sensor.SensorData;
+import code.sensor.Engine;
 /*
  * Code made by: Yi Chen
  * Date created: 13/05/2024
@@ -15,7 +15,7 @@ public class EngineControlSystem {
     //thrust and fuel flow of engine two
     private double thrustTwo;
     private double fuelFlowTwo;
-    private Engine [] engines;
+    private Engine [] engines = new Engine[2];
     private SensorData sensorData;
     /**
     * Creates an engine control system object
