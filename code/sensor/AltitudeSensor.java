@@ -6,7 +6,6 @@
 package code.sensor;
 
 public class AltitudeSensor extends Sensor{
-    private long updateFreq;
     private double currAltitudeGPS;
     private double currAltitudeBarometric;
     private static double MIN_ALTITUDE = -1000;
