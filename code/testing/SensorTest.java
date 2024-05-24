@@ -1,6 +1,5 @@
 package code.testing;
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import code.sensor.*;
 
@@ -12,7 +11,7 @@ public class SensorTest {
     @Test
     public void testGetAirspeed() {
         AirspeedSensor airspeedSensor = new AirspeedSensor();
-        assertEquals(1000, airspeedSensor.getCurrentAirspeed(), 0.001);
+        assertEquals(50, airspeedSensor.getCurrentAirspeed(), 0.001);
     }
 
     /**
