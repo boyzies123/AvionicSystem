@@ -32,7 +32,7 @@ public class CoreSystem {
     private List <Sensor> attitudeSensors;
     private List <Sensor> altitudeSensors;
     private List <Sensor> airspeedSensors;
-    private Engine [] engines;
+    private Engine [] engines = new Engine[2];
 
    /**
     * Creates a core system object
