@@ -12,6 +12,7 @@ public class AirspeedSensor extends Sensor{
     private double airspeedId;
     public AirspeedSensor() {
     	super(1000);
+        this.currentAirspeed = MIN_SPEED;
     }
 
     public double getCurrentAirspeed(){
