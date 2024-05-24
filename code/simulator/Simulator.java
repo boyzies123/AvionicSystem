@@ -7,12 +7,12 @@ package code.simulator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import code.core.CoreSystem;
 import code.sensor.AirspeedSensor;
 import code.sensor.AltitudeSensor;
 import code.sensor.AttitudeSensor;
@@ -24,21 +24,13 @@ public class Simulator {
     private List<Instance> attitudeData;
     private List<Instance> engineData;
 
-    private List<AirspeedSensor> airspeedSensors;
-    private List<AltitudeSensor> altitudeSensors;
-    private List<AttitudeSensor> attitudeSensors;
-    private List<Engine> engineSensors;
-
     public Simulator() {
         airspeedData = new  ArrayList<>();
         altitudeData = new  ArrayList<>();
         attitudeData = new  ArrayList<>();
         engineData = new  ArrayList<>(); 
 
-        airspeedSensors = new  ArrayList<>();
-        altitudeSensors = new  ArrayList<>();
-        attitudeSensors = new  ArrayList<>();
-        engineSensors = new  ArrayList<>();
+        CoreSystem cS = new CoreSystem();
     }
 
     /**
@@ -102,20 +94,5 @@ public class Simulator {
         sim.altitudeData = readData("data/altitude/" + altitudeFile, sim);
         sim.attitudeData = readData("data/attitude/" + attitudeFile, sim);
         sim.engineData = readData("data/engine/" + engineFile, sim);
-
-        // Create simulator instances for 2oo3
-        for (int i=0; i<3; i++) {
-            sim.airspeedSensors.add(new AirspeedSensor());
-
-            sim.altitudeSensors.add(new AltitudeSensor(sim.airspeedData.get(0).getValues().get(sim.airspeedData.get(0).getFieldNames().get(0)), 
-            sim.altitudeData.get(1).getValues().get(sim.altitudeData.get(1).getFieldNames().get(1))));
-
-            sim.attitudeSensors.add(new AttitudeSensor(sim.altitudeData.get(0).getValues().get(sim.attitudeData.get(0).getFieldNames().get(0)), 
-            sim.altitudeData.get(0).getValues().get(sim.attitudeData.get(1).getFieldNames().get(1)), 
-            sim.altitudeData.get(0).getValues().get(sim.attitudeData.get(2).getFieldNames().get(2))));
-
-            sim.engineSensors.add(new Engine(sim.engineData.get(0).getValues().get(sim.engineData.get(0).getFieldNames().get(0)), 
-            sim.engineData.get(0).getValues().get(sim.engineData.get(1).getFieldNames().get(1))));
-        }
     }
 }
