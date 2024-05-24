@@ -1,4 +1,4 @@
-package core;
+package code.core;
 import code.sensor.AirspeedSensor;
 import code.sensor.AltitudeSensor;
 import code.sensor.AttitudeSensor;
