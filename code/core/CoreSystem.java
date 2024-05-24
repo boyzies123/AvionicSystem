@@ -217,6 +217,34 @@ public class CoreSystem {
         SensorDataDisplay.updateFuel2(this.engines[1].getFuelFlow());
 
     }
+    /**
+    * Gets all altitude sensors of this system
+    * @param List<Sensor> list of altitude sensors
+    */
+    public List <Sensor> getAltitudeSensors(){
+        return this.altitudeSensors;
+    }
+    /**
+    * Gets all airspeed sensors of this system
+    * @param List<Sensor> list of airspeed sensors
+    */
+    public List <Sensor> getAirspeedSensors(){
+        return this.airspeedSensors;
+    }
+    /**
+    * Gets all airspeed sensors of this system
+    * @param List<Sensor> list of attitude sensors
+    */
+    public List <Sensor> getAttitudeSensors(){
+        return this.altitudeSensors;
+    }
+    /**
+    * Gets all engines of this system
+    * @param Engine[] list of engines
+    */
+    public Engine[] getEngines(){
+        return this.engines;
+    }
     public static void main(String [] args){
         CoreSystem coreSystem = new CoreSystem();
         coreSystem.start();
