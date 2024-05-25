@@ -1,12 +1,15 @@
 package code.autopilot;
 
 
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import code.sensor.SensorData;
+import code.src.Waypoint;
 import code.ui.HazardAlertsDisplay;
+import code.ui.FlightPlanManagement;
 /*
  * Code made by: Yi Chen
  * Date created: 13/05/2024
@@ -29,6 +32,11 @@ public class AutoPilotSystem {
     private int retries = 0;
     //counts number of times checkExecution has been called.
     private int count = 0;
+    private double altitude = 0;
+    private List <Waypoint> waypoints = FlightPlanManagement.getWaypoints();
+    private double currentLatitude = 0; //y
+    private double currentLongitude = 0; //x
+
     /**
      * Creates an AutoPilotSystem object with a given control surface.
      * 
@@ -39,27 +47,28 @@ public class AutoPilotSystem {
         this.active = active;
         this.controlSurface = controlSurface;
         this.engineControlSystem = engineControlSystem;
-        executor = Executors.newSingleThreadScheduledExecutor();
-        executor.scheduleAtFixedRate(this::sendControlSignal, 0, CONTROL_FREQUENCY, TimeUnit.MILLISECONDS);
+        this.executor = Executors.newSingleThreadScheduledExecutor();
+        this.executor.scheduleAtFixedRate(this::sendControlSignal, 0, this.CONTROL_FREQUENCY, TimeUnit.MILLISECONDS);
+
     }
     /**
      * Starts the autopilot system.
      */
     public void start(){
-        engage = true;
+        this.engage = true;
     }
     /**
      * Stops the autopilot system.
      */
     public void stop(){
-        engage = false;
+        this.engage = false;
     }
     /**
      * Sets whether autopilot is active or not. For redundancy purposes.
      * @param status the status of autopilot to be set
      */
     public void setStatus(boolean status){
-        active = status;
+        this.active = status;
     }
     /**  
      * Send control signals to the aircraft’s control
@@ -67,32 +76,34 @@ public class AutoPilotSystem {
      */
     public void sendControlSignal(){
         //Not engaged. Do not send control signals
-        if (!engage || !active){
+        if (!this.engage || !this.active){
             return;
         }
+
         //Calculate control signal values based on simulated attitude data
-        SensorData currentOrientation = controlSurface.sendSensorData();
+        SensorData currentOrientation = this.controlSurface.sendSensorData();
         //Calculate the desired adjustments
-        double desiredPitch = calculateDesiredPitch(currentOrientation.getPitch());
-        double desiredRoll = calculateDesiredRoll(currentOrientation.getRoll());
+        double desiredPitch = calculateDesiredPitch();
+        double desiredRoll = calculateDesiredRoll();
         double desiredYaw = calculateDesiredYaw(currentOrientation.getYaw());
-        double desiredThrustOne = calculateThrust(currentOrientation.getPitch());
-        double desiredFuelFlowOne = calculateFuelFlow(currentOrientation.getPitch());
-        double desiredThrustTwo = calculateThrust(currentOrientation.getPitch());
-        double desiredFuelFlowTwo = calculateFuelFlow(currentOrientation.getPitch());
+        double desiredThrustOne = calculateThrust();
+        double desiredFuelFlowOne = calculateFuelFlow();
+        double desiredThrustTwo = calculateThrust();
+        double desiredFuelFlowTwo = calculateFuelFlow();
+        this.waypoints.remove(0);
         //Original values of control surfaces. For health detection checks
-        double originalAileronPosition = controlSurface.getAileronPosition();
-        double originalElevatorPosition = controlSurface.getElevatorPosition();
-        double originalRudderPosition = controlSurface.getRudderPosition();
+        double originalAileronPosition = this.controlSurface.getAileronPosition();
+        double originalElevatorPosition = this.controlSurface.getElevatorPosition();
+        double originalRudderPosition = this.controlSurface.getRudderPosition();
         //Currently temp values for control signal values
         ControlSignal csToControlSurface = new ControlSignal(desiredRoll, desiredPitch, desiredYaw);
         ControlSignal csToEngineControlSystem = new ControlSignal(desiredThrustOne, desiredFuelFlowOne, desiredThrustTwo, desiredFuelFlowTwo);
-        controlSurface.executeControlSignal(csToControlSurface);
-        engineControlSystem.executeControlSignal(csToEngineControlSystem);
+        this.controlSurface.executeControlSignal(csToControlSurface);
+        this.engineControlSystem.executeControlSignal(csToEngineControlSystem);
         //Check health of this autopilot system and determine the need for replacement.
         healthCheck(desiredPitch, desiredRoll, desiredYaw, originalAileronPosition, originalElevatorPosition, originalRudderPosition);
-        executor2 = Executors.newSingleThreadScheduledExecutor();
-        executor2.scheduleAtFixedRate(this::checkExecution, 0, 200, TimeUnit.MILLISECONDS);
+        this.executor2 = Executors.newSingleThreadScheduledExecutor();
+        this.executor2.scheduleAtFixedRate(this::checkExecution, 0, 200, TimeUnit.MILLISECONDS);
     }
     /** 
      * Reads back sensor data and checks if execution was successful.
@@ -102,20 +113,20 @@ public class AutoPilotSystem {
     public void checkExecution(){
         int MAX_COUNT = 5; // Total iterations
         // Call the method you want to run every 200ms here
-        boolean success = verifyExecution(controlSurface.sendSensorData(), engineControlSystem.sendSensorData());
-        count++;
+        boolean success = verifyExecution(this.controlSurface.sendSensorData(), this.engineControlSystem.sendSensorData());
+        this.count++;
         if (success){
-            retries = 0;
-            executor2.shutdown();
+            this.retries = 0;
+            this.executor2.shutdown();
         }
         //check whether execution was sucessful.
         //if not, continue checking up to 3 times
-        if (count == MAX_COUNT) { 
-            count = 0;
-            retries++;
+        if (this.count == MAX_COUNT) { 
+            this.count = 0;
+            this.retries++;
             // 3 attempts reached. Alert the pilot via the user interface.
-            if (retries == MAX_RETRIES){
-                retries = 0;
+            if (this.retries == this.MAX_RETRIES){
+                this.retries = 0;
                 alertUserInterface();
             }
         } 
@@ -131,37 +142,44 @@ public class AutoPilotSystem {
      */
     
     public boolean verifyExecution(SensorData sensorDataControlSurface, SensorData sensorDataEngineControl){
-        boolean elevatorCompare = Math.abs(sensorDataControlSurface.getPitch()-controlSurface.getElevatorPosition())<=MARGIN_OF_ERROR_CONTROL_SURFACES*controlSurface.getElevatorPosition();
-        boolean aileronCompare = Math.abs(sensorDataControlSurface.getRoll()-controlSurface.getAileronPosition())<=MARGIN_OF_ERROR_CONTROL_SURFACES*controlSurface.getAileronPosition();
-        boolean rudderCompare = Math.abs(sensorDataControlSurface.getYaw()-controlSurface.getRudderPosition())<=MARGIN_OF_ERROR_CONTROL_SURFACES*controlSurface.getRudderPosition();
-        boolean fuelFlowOneCompare = Math.abs(sensorDataEngineControl.getFuelFlow1()-engineControlSystem.getFuelFlowOne()) <=MARGIN_OF_ERROR_ENGINE_PARAMETERS*engineControlSystem.getFuelFlowOne();
-        boolean thrustOneCompare = Math.abs(sensorDataEngineControl.getThrust1()-engineControlSystem.getThrustOne())<=MARGIN_OF_ERROR_ENGINE_PARAMETERS*engineControlSystem.getThrustOne();
-        boolean fuelFlowTwoCompare = Math.abs(sensorDataEngineControl.getFuelFlow2()-engineControlSystem.getFuelFlowTwo()) <=MARGIN_OF_ERROR_ENGINE_PARAMETERS*engineControlSystem.getFuelFlowTwo();
-        boolean thrustTwoCompare = Math.abs(sensorDataEngineControl.getThrust2()-engineControlSystem.getThrustTwo())<=MARGIN_OF_ERROR_ENGINE_PARAMETERS*engineControlSystem.getThrustTwo();
+        boolean elevatorCompare = Math.abs(sensorDataControlSurface.getPitch()-this.controlSurface.getElevatorPosition())<=this.MARGIN_OF_ERROR_CONTROL_SURFACES*this.controlSurface.getElevatorPosition();
+        boolean aileronCompare = Math.abs(sensorDataControlSurface.getRoll()-this.controlSurface.getAileronPosition())<=this.MARGIN_OF_ERROR_CONTROL_SURFACES*this.controlSurface.getAileronPosition();
+        boolean rudderCompare = Math.abs(sensorDataControlSurface.getYaw()-this.controlSurface.getRudderPosition())<=this.MARGIN_OF_ERROR_CONTROL_SURFACES*this.controlSurface.getRudderPosition();
+        boolean fuelFlowOneCompare = Math.abs(sensorDataEngineControl.getFuelFlow1()-this.engineControlSystem.getFuelFlowOne()) <=this.MARGIN_OF_ERROR_ENGINE_PARAMETERS*this.engineControlSystem.getFuelFlowOne();
+        boolean thrustOneCompare = Math.abs(sensorDataEngineControl.getThrust1()-this.engineControlSystem.getThrustOne())<=this.MARGIN_OF_ERROR_ENGINE_PARAMETERS*this.engineControlSystem.getThrustOne();
+        boolean fuelFlowTwoCompare = Math.abs(sensorDataEngineControl.getFuelFlow2()-this.engineControlSystem.getFuelFlowTwo()) <=this.MARGIN_OF_ERROR_ENGINE_PARAMETERS*this.engineControlSystem.getFuelFlowTwo();
+        boolean thrustTwoCompare = Math.abs(sensorDataEngineControl.getThrust2()-this.engineControlSystem.getThrustTwo())<=this.MARGIN_OF_ERROR_ENGINE_PARAMETERS*this.engineControlSystem.getThrustTwo();
         boolean success = elevatorCompare && aileronCompare && rudderCompare && fuelFlowOneCompare && thrustOneCompare && fuelFlowTwoCompare && thrustTwoCompare;
         if (success) {
-            retries = 0;
+            this.retries = 0;
             return true; // Exit if successful
         }
         return false;
     }
     /**
      * Calculate the pitch adjustment
-     * @param currentPitch current pitch reported by the attitude sensor
      * @return the value of pitch that should be adjusted by
      */
-    private double calculateDesiredPitch(double currentPitch) {
-        // Example logic to determine the desired pitch adjustment
-        return currentPitch * 0.1; 
+    private double calculateDesiredPitch() {
+        if (this.waypoints.isEmpty()) {
+            return 0; // No change if no waypoints left
+        }
+        //Assuming waypoints are in order
+        Waypoint w = this.waypoints.get(0); // Get the next waypoint
+        double altiudeDifference = this.altitude-w.getAltitude();
+        return altiudeDifference * 0.05; 
     }
     /**
      * Calculate the roll adjustment
      * @param currentRoll current roll reported by the attitude sensor
      * @return the value of roll that should be adjusted by
      */
-    private double calculateDesiredRoll(double currentRoll) {
-        // Example logic to determine the desired roll adjustment
-        return currentRoll * 0.05; 
+    private double calculateDesiredRoll() {
+        if (this.waypoints.isEmpty()) {
+            return 0; // No change if no waypoints left
+        }
+        double desiredYaw = calculateDesiredYaw(this.controlSurface.sendSensorData().getYaw());
+        return desiredYaw * 0.1; 
     }
     /**
      * Calculate the yaw adjustment
@@ -169,26 +187,57 @@ public class AutoPilotSystem {
      * @return the value of yaw that should be adjusted by
      */
     private double calculateDesiredYaw(double currentYaw) {
-        // Example logic to determine the desired yaw adjustment
-        return currentYaw * 0.02; 
+        // Assuming waypoints are in order
+        if (this.waypoints.isEmpty()) {
+            return 0; // No change if no waypoints left
+        }
+        Waypoint w = this.waypoints.get(0); // Get the next waypoint
+        double deltaLongitude = w.getxPos() - this.currentLongitude;
+        double deltaLatitude = w.getyPos() - this.currentLatitude;
+
+        // Calculate the desired heading
+        double desiredHeading = Math.toDegrees(Math.atan2(deltaLongitude, deltaLatitude));
+
+        // Normalize desired heading to [0, 360) degrees
+        if (desiredHeading < 0) {
+            desiredHeading += 360;
+        }
+
+        // Calculate the yaw adjustment needed to align with desired heading
+        double desiredYaw = desiredHeading - currentYaw;
+
+        // Normalize yaw adjustment to [-180, 180) degrees
+        if (desiredYaw > 180) {
+            desiredYaw -= 360;
+        } else if (desiredYaw < -180) {
+            desiredYaw += 360;
+        }  
+
+        return desiredYaw;
     }
     /**
      * Calculate the fuel flow adjustment
-     * @param currentPitch current pitch reported by the attitude sensor
      * @return the value of thust that should be adjusted by
      */
-    private double calculateThrust(double currentPitch) {
-        // Example logic to calculate thrust
-        return currentPitch * 0.1;
+    private double calculateThrust() {
+        if (this.waypoints.isEmpty()) {
+            return 0; // No change if no waypoints left
+        }
+        //Assuming waypoints are in order
+        Waypoint w = this.waypoints.remove(0);
+        return w.getSpeedRestriction();
+
     }
     /**
      * Calculate the fuel flow adjustment
-     * @param currentPitch current pitch reported by the attitude sensor
      * @return the value of fuel flow that should be adjusted by
      */
-    private double calculateFuelFlow(double currentPitch) {
-        // Example logic to calculate fuel flow
-        return currentPitch * 0.05;
+    private double calculateFuelFlow() {
+        if (this.waypoints.isEmpty()) {
+            return 0; // No change if no waypoints left
+        }
+        double desiredThrust = calculateThrust();
+        return desiredThrust * 0.1; 
     }
     /**
      * Checks health of autopilot system and determine whether it needs to be switched
@@ -205,10 +254,10 @@ public class AutoPilotSystem {
      */
     public void healthCheck(double desiredPitch, double desiredRoll, double desiredYaw, double originalAileronPosition, double originalElevatorPosition, double originalRudderPosition){
         double tolerance = 0.1;
-        if (controlSurface.getElevatorPosition() - (desiredPitch + originalElevatorPosition) > tolerance ||
-        controlSurface.getAileronPosition() - (desiredRoll + originalAileronPosition) > tolerance ||
-        controlSurface.getRudderPosition() - (desiredYaw + originalRudderPosition) > tolerance){
-            errorInAutoPilot = true;
+        if (this.controlSurface.getElevatorPosition() - (desiredPitch + originalElevatorPosition) > tolerance ||
+        this.controlSurface.getAileronPosition() - (desiredRoll + originalAileronPosition) > tolerance ||
+        this.controlSurface.getRudderPosition() - (desiredYaw + originalRudderPosition) > tolerance){
+            this.errorInAutoPilot = true;
 
         }
     }
@@ -217,27 +266,34 @@ public class AutoPilotSystem {
      * @return error status
      */
     public boolean errorInAutoPilot(){
-        return errorInAutoPilot;
+        return this.errorInAutoPilot;
     }
     /**
      * Checks whether this autopilot is active
      * @return active status
      */
     public boolean checkActive(){
-        return active;
+        return this.active;
     }
     /**
      * Alerts the user interface in case of control signal failure.
      */
     public void alertUserInterface(){
         HazardAlertsDisplay.issueHazardAlert();
-        System.out.println("Control signal failure");
+        System.out.println("Control signal failure"); //$NON-NLS-1$
     }
     /**
      * Checks whether autopilot is currently engaged
      * @return whether autopilot is engaged or not.
      */
     public boolean checkEngaged(){
-        return engage;
+        return this.engage;
+    }
+    /**
+     * Receives the current altitude, the average of GPS and Barometric altitude
+     * @param altitude1 the current altitude
+     */
+    public void receiveAltitude(double altitude1){
+        this.altitude = altitude1;
     }
 }

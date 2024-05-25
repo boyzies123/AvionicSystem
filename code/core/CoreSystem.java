@@ -15,8 +15,7 @@ import code.autopilot.EngineControlSystem;
 import java.util.ArrayList;
 
 import code.ui.AutopilotControlPanel;
-import code.ui.FlightPlanManagement;
-import code.ui.HazardAlertsDisplay;
+
 import code.ui.PilotUserInterface;
 import code.ui.SensorDataDisplay;
 /*
@@ -26,7 +25,6 @@ import code.ui.SensorDataDisplay;
  */
 public class CoreSystem {
     private ScheduledExecutorService executor;
-    private PilotUserInterface pilotUserInterface;
     private AutoPilotSystem autoPilotSystem;
     private AutoPilotSystem backupAutoPilotSystem;
     private List <Sensor> attitudeSensors;
@@ -45,7 +43,11 @@ public class CoreSystem {
      * Starts the whole system, and intializes many of the components.
      */
     public void start() {
-    	this.pilotUserInterface = new PilotUserInterface();
+        //Note: this intialization will result in an error and doesn't
+        //comply with rule 9 of the power of 10 rules
+        //This is beacuse of the way pilotuserinterface was designed, as 
+        //all components of the pilotuserinterface is intialized in the constructor.
+    	new PilotUserInterface();
         this.attitudeSensors = new ArrayList <>();
         this.altitudeSensors = new ArrayList <>();
         this.airspeedSensors = new ArrayList <>();
@@ -76,7 +78,9 @@ public class CoreSystem {
     */
     public void run(){
         checkErrorInAutoPilot();
-        detectFault();
+        detectFault(); 
+        this.autoPilotSystem.receiveAltitude(((AltitudeSensor)this.altitudeSensors.get(0)).getCombinedAltitude());
+
         
     }
     /**
@@ -162,10 +166,13 @@ public class CoreSystem {
     * Notify pilot of the error 
     */
     public static void notifyPilot(List <String> faults){
-        //Notify pilot via hazardalertsdisplay.
-        for (String fault: faults){
-            HazardAlertsDisplay.issueHazardAlert();
+        for (String fault : faults){
+            System.out.println(fault);
         }
+        //Notify pilot via hazardalertsdisplay.
+        //Won't do anting because issuehazardalert did not end up getting implemented.
+        //and fault wont be able to be passed to pilot
+        
     }
     //Note all values are currently 0. When we start simulation, proper values are provided.
     /**
@@ -204,7 +211,14 @@ public class CoreSystem {
             e.setFuelFlow(0);
         }
     }
-   
+   /**
+    * Display the sensor based on the current sensor value to the UI
+    * @param airspeed the current airspeed
+    * @param altitude the current altitude
+    * @param pitch the current pitch
+    * @param roll the current roll
+    * @param yaw the current yaw
+    */
     public void displaySensorValues(double airspeed, double altitude, double pitch, double roll, double yaw){
         SensorDataDisplay.updateAirspeed(airspeed);
         SensorDataDisplay.updateAltitude(altitude);
@@ -217,6 +231,36 @@ public class CoreSystem {
         SensorDataDisplay.updateFuel2(this.engines[1].getFuelFlow());
 
     }
+    /**
+    * Gets all altitude sensors of this system
+    * @param List<Sensor> list of altitude sensors
+    */
+    public List <Sensor> getAltitudeSensors(){
+        return this.altitudeSensors;
+    }
+    /**
+    * Gets all airspeed sensors of this system
+    * @param List<Sensor> list of airspeed sensors
+    */
+    public List <Sensor> getAirspeedSensors(){
+        return this.airspeedSensors;
+    }
+    /**
+    * Gets all airspeed sensors of this system
+    * @param List<Sensor> list of attitude sensors
+    */
+    public List <Sensor> getAttitudeSensors(){
+        return this.altitudeSensors;
+    }
+    /**
+    * Gets all engines of this system
+    * @param Engine[] list of engines
+    */
+    public Engine[] getEngines(){
+        return this.engines;
+    }
+    
+
     public static void main(String [] args){
         CoreSystem coreSystem = new CoreSystem();
         coreSystem.start();
