@@ -89,6 +89,17 @@ public class ControlSurface {
         return sd;
     }
     /**
+     * This method is for testing purpose. Incorrect sensor data will be passed to
+     * simulate incorrect behavior, ensuring that requirements are met.
+     */
+    public SensorData sendSensorData(double yaw, double roll, double pitch){
+        SensorData sd = ((AttitudeSensor) this.sensor[0]).sendSensorData();
+        sd.setRoll(roll);
+        sd.setYaw(yaw);
+        sd.setPitch(pitch);
+        return sd;
+    }
+    /**
      * Gets current aileron position
      * @return the current aileron position
      */
