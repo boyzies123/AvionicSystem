@@ -1,5 +1,5 @@
 /*
- * Code made by: Harry Booth-Beach
+ * Code made by: Harry Booth-Beach, with modifications by Yi Chen
  * Date created: 17/05/2024
  * Date modified: 17/05/2024
  */
@@ -8,17 +8,20 @@ package code.sensor;
 public class AltitudeSensor extends Sensor{
     private double currAltitudeGPS;
     private double currAltitudeBarometric;
-    private static double MIN_ALTITUDE = -1000;
+    private static double MIN_ALTITUDE = -10000;
     private static double MAX_ALTITUDE = 50000;
+    /**
+     * Creates altitude sensor object
+     */
     public AltitudeSensor(double currAltitudeGPS, double currAltitudeBarometric) {
     	super(500);
     	this.currAltitudeBarometric = currAltitudeBarometric;
     	this.currAltitudeGPS = currAltitudeGPS;
     }
     /**
-     * Sends the sensor data to the SensorData class
+     * Sends the sensor data 
      * Value is GPS if isGPS is true, barometric otherwise
-     * @param sD
+     * @return sensordata Sensor data produced by sensor
      */
     public SensorData sendSensorData() {
         SensorData sensorData = new SensorData();
@@ -34,7 +37,7 @@ public class AltitudeSensor extends Sensor{
 
     /**
      * Setter method for current altitude GPS
-     * @param altitude
+     * @param altitude current gps altitude
      */
     public void setCurrAltitudeGPS(double altitude) {
         this.currAltitudeGPS = altitude;
@@ -42,7 +45,7 @@ public class AltitudeSensor extends Sensor{
 
     /**
      * Setter method for current altitude barometric
-     * @param altitude
+     * @param altitude current barometric altitude
      */
     public void setCurrAltitudeBarometric(double altitude) {
         this.currAltitudeBarometric = altitude;
@@ -54,7 +57,7 @@ public class AltitudeSensor extends Sensor{
 
     /**
      * Getter method for current altitude GPS
-     * @return
+     * @return the current altitude in GPS
      */
     public double getCurrAltitudeGPS() {
         return this.currAltitudeGPS;
@@ -62,29 +65,28 @@ public class AltitudeSensor extends Sensor{
 
     /**
      * Getter method for average of the two altitudes
-     * @return
+     * @return the average altitude of barometric and gps
      */
     public double getCombinedAltitude() {
         return (this.currAltitudeBarometric + this.currAltitudeGPS) / 2;
     }
     /**
      * Getter method for current altitude barometric
-     * @return
+     * @return the current altitude of barometric
      */
     public double getCurrAltitudeBarometric() {
         return this.currAltitudeBarometric;
     }
-    
     /**
      * Getter method for maximum altitude
-     * @return
+     * @return the maximum altitude
      */
     public static double getMaxAltitude() {
         return MAX_ALTITUDE;
     }
     /**
      * Getter method for minimum altitude
-     * @return
+     * @return the minimum altitude
      */
     public static double getMinAltitude() {
         return MIN_ALTITUDE;
