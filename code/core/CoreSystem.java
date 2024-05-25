@@ -21,7 +21,7 @@ import code.ui.SensorDataDisplay;
 /*
  * Code made by: Yi Chen
  * Date created: 17/05/2024
- * Date modified: 22/05/2024
+ * Date modified: 25/05/2024
  */
 public class CoreSystem {
     private ScheduledExecutorService executor;
@@ -56,10 +56,10 @@ public class CoreSystem {
             this.airspeedSensors.add(new AirspeedSensor());
             this.altitudeSensors.add(new AltitudeSensor(0, 0));
         }
-        controlSurfaceOne = new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2));
-        controlSurfaceTwo = new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2));
-        this.autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(this.engines[0], this.engines[1]), true);
-        this.backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(this.engines[0], this.engines[1]),false);
+        this.controlSurfaceOne = new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2));
+        this.controlSurfaceTwo = new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2));
+        this.autoPilotSystem = new AutoPilotSystem(this.controlSurfaceOne, new EngineControlSystem(this.engines[0], this.engines[1]), true);
+        this.backupAutoPilotSystem = new AutoPilotSystem(this.controlSurfaceTwo, new EngineControlSystem(this.engines[0], this.engines[1]),false);
         AutopilotControlPanel.addAutoPilotSystem(this.autoPilotSystem, this.backupAutoPilotSystem);
     }   
     /**
@@ -276,16 +276,7 @@ public class CoreSystem {
     public AutoPilotSystem getbackUpAutoPilotSystem(){
         return this.backupAutoPilotSystem;
     }
-    /**
-    * Gets the control surfaces (redundant and main)
-    * @return the control surfaces
-    */
-    public List <ControlSurface> getControlSurfaces(){
-        List <ControlSurface> controlSurfaces = new ArrayList <ControlSurface>();
-        controlSurfaces.add(controlSurfaceOne);
-        controlSurfaces.add(controlSurfaceTwo);
-        return controlSurfaces;
-    }
+
     public static void main(String [] args){
         CoreSystem coreSystem = new CoreSystem();
         coreSystem.start();
