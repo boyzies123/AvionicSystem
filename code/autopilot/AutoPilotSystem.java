@@ -13,7 +13,7 @@ import code.ui.FlightPlanManagement;
 /*
  * Code made by: Yi Chen
  * Date created: 13/05/2024
- * Date modified: 21/05/2024
+ * Date modified: 25/05/2024
  */
 public class AutoPilotSystem {
     private ScheduledExecutorService executor;
@@ -36,7 +36,9 @@ public class AutoPilotSystem {
     private List <Waypoint> waypoints = FlightPlanManagement.getWaypoints();
     private double currentLatitude = 0; //y
     private double currentLongitude = 0; //x
-
+    //For testing purposes to simulate incorrect data
+    private boolean simulation = false;
+    private boolean alertSent = false;
     /**
      * Creates an AutoPilotSystem object with a given control surface.
      * 
@@ -115,9 +117,13 @@ public class AutoPilotSystem {
         // Call the method you want to run every 200ms here
         boolean success = verifyExecution(this.controlSurface.sendSensorData(), this.engineControlSystem.sendSensorData());
         this.count++;
+        if (simulation){
+            success = verifyExecution(this.controlSurface.sendSensorData(4000, 4000, 4000), this.engineControlSystem.sendSensorData());
+        }
         if (success){
             this.retries = 0;
             this.executor2.shutdown();
+            alertSent = true;
         }
         //check whether execution was sucessful.
         //if not, continue checking up to 3 times
@@ -295,5 +301,12 @@ public class AutoPilotSystem {
      */
     public void receiveAltitude(double altitude1){
         this.altitude = altitude1;
+    }
+    /**
+     * Gets whether alert has been sent
+     * @return whether alert has been sent
+     */
+    public boolean getAlertSent(){
+        return alertSent;
     }
 }
