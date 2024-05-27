@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import code.core.CoreSystem;
+import code.sensor.Sensor;
 import code.sensor.AirspeedSensor;
 import code.sensor.AltitudeSensor;
 import code.sensor.AttitudeSensor;
@@ -98,5 +99,17 @@ public class Simulator {
 
         // Start simulator running
         sim.cS.start();
+
+        // Create lists to store sensors to update
+        List<Sensor> airspeedSensor = new ArrayList<>();
+        List<Sensor> altitudeSensor = new ArrayList<>();
+        List<Sensor> attitudeSensor = new ArrayList<>();
+        Engine[] engineSensor = new Engine[2];
+
+        // set sensor lists through core system getters
+        airspeedSensor = sim.cS.getAirspeedSensors();
+        altitudeSensor = sim.cS.getAltitudeSensors();
+        attitudeSensor = sim.cS.getAttitudeSensors();
+        engineSensor = sim.cS.getEngines();
     }
 }
