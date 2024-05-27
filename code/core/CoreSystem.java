@@ -33,6 +33,7 @@ public class CoreSystem {
     private Engine [] engines = new Engine[2];
     private ControlSurface controlSurfaceOne;
     private ControlSurface controlSurfaceTwo;
+    private static List <String> faults = new ArrayList <>();
    /**
     * Creates a core system object
     * This avionic system is based of the Airbus A320.
@@ -152,7 +153,7 @@ public class CoreSystem {
     * @param yawFault true if yaw fault
     */
     public static void handleSensorFaults(boolean airspeedFault, boolean altitudeFault, boolean pitchFault, boolean rollFault, boolean yawFault) {
-        List <String> faults = new ArrayList <>();
+        faults = new ArrayList <>();
         if (airspeedFault) {
            faults.add("Airspeed sensor fault detected."); //$NON-NLS-1$
         }
@@ -253,7 +254,7 @@ public class CoreSystem {
     * @param List<Sensor> list of attitude sensors
     */
     public List <Sensor> getAttitudeSensors(){
-        return this.altitudeSensors;
+        return this.attitudeSensors;
     }
     /**
     * Gets all engines of this system
@@ -273,8 +274,64 @@ public class CoreSystem {
     * Gets the aircrafts backup autopilot system 
     * @return backup autopilot system
     */
-    public AutoPilotSystem getbackUpAutoPilotSystem(){
+    public AutoPilotSystem getBackUpAutoPilotSystem(){
         return this.backupAutoPilotSystem;
+    }
+
+    /**
+     * Gets the faults of the system
+     * @return the faults
+     */
+    public static List <String> getFaults(){
+        return faults;
+    }
+
+    /**
+     * Sets the altitude sensors of this system
+     * @param altitudeSensors the altitude sensors
+     */
+    public void setAltitudeSensors(List <Sensor> altitudeSensors){
+        this.altitudeSensors = altitudeSensors;
+    }
+
+    /**
+     * Sets the airspeed sensors of this system
+     * @param airspeedSensors the airspeed sensors
+     */
+    public void setAirspeedSensors(List <Sensor> airspeedSensors){
+        this.airspeedSensors = airspeedSensors;
+    }
+
+    /**
+     * Sets the attitude sensors of this system
+     * @param attitudeSensors the attitude sensors
+     */
+    public void setAttitudeSensors(List <Sensor> attitudeSensors){
+        this.attitudeSensors = attitudeSensors;
+    }
+
+    /**
+     * Sets the engines of this system
+     * @param engines the engines
+     */
+    public void setEngines(Engine[] engines){
+        this.engines = engines;
+    }
+
+    /**
+     * Sets the autopilot system of this system
+     * @param autoPilotSystem the autopilot system
+     */
+    public void setAutoPilotSystem(AutoPilotSystem autoPilotSystem){
+        this.autoPilotSystem = autoPilotSystem;
+    }
+
+    /**
+     * Sets the backup autopilot system of this system
+     * @param backupAutoPilotSystem the backup autopilot system
+     */
+    public void setBackupAutoPilotSystem(AutoPilotSystem backupAutoPilotSystem){
+        this.backupAutoPilotSystem = backupAutoPilotSystem;
     }
 
     public static void main(String [] args){
