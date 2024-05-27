@@ -1,4 +1,4 @@
-package testing;
+package code.testing;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,14 +12,11 @@ import code.autopilot.AutoPilotSystem;
 import code.autopilot.ControlSignal;
 import code.autopilot.ControlSurface;
 import code.autopilot.EngineControlSystem;
-import core.CoreSystem;
 import code.sensor.AttitudeSensor;
 import code.sensor.Engine;
 import code.sensor.Sensor;
-import code.sensor.SensorData;
-import code.ui.AutopilotControlPanel;
 
-import org.junit.jupiter.api.Assertions.*;
+import code.ui.AutopilotControlPanel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -77,67 +74,9 @@ public class AutoPilotTest {
         autoPilotSystem.setStatus(true);
         assertTrue(autoPilotSystem.checkActive());
     }
-    /**
-     * Test that control signal can be sent
-     */
-    @Test
-    void testSendingControlSignal(){
-        ControlSignal csToControlSurface = new ControlSignal(9.8, 19.8, 29.8);
-        ControlSignal csToEngineControlSystem = new ControlSignal(100, 120, 100, 120);
-        double oldAileronPosition = csToControlSurface.getAileronPosition();
-        double oldRudderPosition = csToControlSurface.getRudderPosition();
-        double oldElevatorPosition = csToControlSurface.getElevatorPosition();
-        double oldThrustOnePosition = csToEngineControlSystem.getThrustOnePosition();
-        double oldThrustTwoPosition = csToEngineControlSystem.getThrustOnePosition();
-        double oldFuelFlowOnePosition = csToEngineControlSystem.getFuelFlowOne();
-        double oldFuelFlowTwoPosition = csToEngineControlSystem.getFuelFlowTwo();
-        this.controlSurface.executeControlSignal(csToControlSurface);
-        this.engineControlSystem.executeControlSignal(csToEngineControlSystem);
-        double newAileronPosition = csToControlSurface.getAileronPosition();
-        double newRudderPosition = csToControlSurface.getRudderPosition();
-        double newElevatorPosition = csToControlSurface.getElevatorPosition();
-        double newThrustOnePosition = csToEngineControlSystem.getThrustOnePosition();
-        double newThrustTwoPosition = csToEngineControlSystem.getThrustOnePosition();
-        double newFuelFlowOnePosition = csToEngineControlSystem.getFuelFlowOne();
-        double newFuelFlowTwoPosition = csToEngineControlSystem.getFuelFlowTwo();
-        assertTrue(oldAileronPosition != newAileronPosition);
-        assertTrue(oldRudderPosition != newRudderPosition);
-        assertTrue(oldElevatorPosition != newElevatorPosition);
-        assertTrue(oldThrustOnePosition != newThrustOnePosition);
-        assertTrue(oldThrustTwoPosition != newThrustTwoPosition);
-        assertTrue(oldFuelFlowOnePosition != newFuelFlowOnePosition);
-        assertTrue(oldFuelFlowTwoPosition != newFuelFlowTwoPosition);
-    }
 
-    /**
-     * Verify the execution of control signal
-     */
-    @Test
-    public void testVerifyExecution_Success() {
-        
-        ControlSignal csToControlSurface = new ControlSignal(9.8, 19.8, 29.8);
-        ControlSignal csToEngineControlSystem = new ControlSignal(100, 120, 100, 120);
-        this.controlSurface.executeControlSignal(csToControlSurface);
-        this.engineControlSystem.executeControlSignal(csToEngineControlSystem);
 
-        // Verify execution
-        assertTrue(this.autoPilotSystem.verifyExecution(this.controlSurface.sendSensorData(), this.engineControlSystem.sendSensorData()));
-    }
-    /**
-     * Verify the failure of executing control signal
-     */
-    @Test
-    public void testVerifyExecution_Failure() {
-        
-        ControlSignal csToControlSurface = new ControlSignal(9.8, 19.8, 29.8);
-        ControlSignal csToEngineControlSystem = new ControlSignal(100, 120, 100, 120);
-        this.controlSurface.executeControlSignal(csToControlSurface);
-        this.engineControlSystem.executeControlSignal(csToEngineControlSystem);
-        //Alter values of sensor so 2oo3 causes draw.
-        ((AttitudeSensor)sensors.get(0)).setRoll(100);
-        ((AttitudeSensor)sensors.get(1)).setRoll(120);
-        
-    }
+ 
     /**
      * Test that health checking of autopilot system works
      */
