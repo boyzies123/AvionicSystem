@@ -100,10 +100,15 @@ public class ControlSurface {
    * Send sensor data to autopilot system to verify execution of control signals
    */
   public SensorData sendSensorData() {
-    updateFromSensorData();
-    SensorData sd = getMajorityVote();
+    try {
+      updateFromSensorData();
+      SensorData sd = getMajorityVote();
+      return sd;
 
-    return sd;
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+      return new SensorData(-9999, -9999, -9999);
+    }
   }
     
   /**.
