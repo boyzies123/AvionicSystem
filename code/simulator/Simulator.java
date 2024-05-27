@@ -1,7 +1,7 @@
 /*
  * Code made by: Harry Booth-Beach
  * Date created: 20/05/2024
- * Date modified: 24/05/2024
+ * Date modified: 27/05/2024
  */
 package code.simulator;
 
@@ -104,12 +104,36 @@ public class Simulator {
         List<Sensor> airspeedSensor = new ArrayList<>();
         List<Sensor> altitudeSensor = new ArrayList<>();
         List<Sensor> attitudeSensor = new ArrayList<>();
-        Engine[] engineSensor = new Engine[2];
+        Sensor[] engineSensor = new Engine[2];
 
-        // set sensor lists through core system getters
+        // Set sensor lists through core system getters
         airspeedSensor = sim.cS.getAirspeedSensors();
         altitudeSensor = sim.cS.getAltitudeSensors();
         attitudeSensor = sim.cS.getAttitudeSensors();
         engineSensor = sim.cS.getEngines();
+
+        // Set up sensors for threading
+        List<SimulatorUpdater> sensorUpdaters = new ArrayList<>();
+        for (Sensor s : airspeedSensor) {
+            SimulatorUpdater simUp = new SimulatorUpdater(sim.airspeedData, s, sim.cS);
+            sensorUpdaters.add(simUp);
+        }
+        for (Sensor s : altitudeSensor) {
+            SimulatorUpdater simUp = new SimulatorUpdater(sim.airspeedData, s, sim.cS);
+            sensorUpdaters.add(simUp);
+        }
+        for (Sensor s : attitudeSensor) {
+            SimulatorUpdater simUp = new SimulatorUpdater(sim.airspeedData, s, sim.cS);
+            sensorUpdaters.add(simUp);
+        }
+        for (Sensor s : engineSensor) {
+            SimulatorUpdater simUp = new SimulatorUpdater(sim.airspeedData, s, sim.cS);
+            sensorUpdaters.add(simUp);
+        }
+        // Run all the sensors
+        for (SimulatorUpdater s : sensorUpdaters) {
+            Thread thread = new Thread(s);
+            thread.start();
+        }
     }
 }
