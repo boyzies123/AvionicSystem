@@ -1,9 +1,10 @@
 package code.sensor;
 
-public class Engine {
+public class Engine extends Sensor {
     private double currThrust;
     private double fuelFlow;
     public Engine(double currentThrust, double fuelFlow){
+        super(1000);
         this.currThrust = currentThrust;
         this.fuelFlow = fuelFlow;
     }
