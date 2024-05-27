@@ -11,6 +11,7 @@ public class Waypoint {
     private double yPos;
     private double speedRestriction;
     private double eta;
+    private double altitude;
 
     public double getEta() {
         return eta;
@@ -20,11 +21,12 @@ public class Waypoint {
         this.eta = eta;
     }
 
-    public Waypoint(double x, double y, double speedRes, double eta){
+    public Waypoint(double x, double y, double speedRes, double eta, double altitude){
         this.xPos = x;
         this.yPos = y;
         this.speedRestriction = speedRes;
         this.eta = eta;
+        this.altitude = altitude;
     }
 
     public double getxPos() {
@@ -49,6 +51,13 @@ public class Waypoint {
 
     public void setSpeedRestriction(double speedRestriction) {
         this.speedRestriction = speedRestriction;
+    }
+    public double getAltitude() {
+        return altitude;
+    }
+
+    public void setAltitude(double altitude) {
+        this.altitude = altitude;
     }
 
     
