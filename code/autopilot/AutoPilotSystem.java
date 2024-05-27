@@ -385,4 +385,14 @@ public class AutoPilotSystem {
   public boolean getAlertSent() {
     return this.alertSent;
   }
+  /**.
+   * Sets whether system is in testing mode
+   *
+   * @param simulation true or false depending on whether code is being tested
+   * 
+   */
+  
+  public void setSimulation(boolean simulation) {
+    this.simulation = simulation;
+  }
 }
