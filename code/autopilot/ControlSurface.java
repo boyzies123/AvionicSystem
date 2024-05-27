@@ -18,9 +18,9 @@ import code.sensor.SensorData;
  */
 public class ControlSurface {
     
-  private double elevatorPosition;
-  private double aileronPosition;
-  private double rudderPosition;
+  private double elevatorPosition = 0;
+  private double aileronPosition = 0;
+  private double rudderPosition = 0;
   private Sensor[] sensor = new Sensor[3];
   private List<SensorData> sensorData = new ArrayList<>();
    
