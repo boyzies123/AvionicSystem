@@ -28,6 +28,10 @@ public class EngineControlSystem {
   public EngineControlSystem(Engine e1, Engine e2) {
     this.engines[0] = e1;
     this.engines[1] = e2;
+    this.thrustOne = this.engines[0].getCurrThrust();
+    this.thrustTwo = this.engines[1].getCurrThrust();
+    this.fuelFlowOne = this.engines[0].getFuelFlow();
+    this.fuelFlowTwo = this.engines[1].getFuelFlow();
   }
   /**.
    * Send sensor data to autopilot system to verify execution of control signals
