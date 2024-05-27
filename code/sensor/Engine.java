@@ -1,3 +1,8 @@
+/*
+ * Code made by: Harry Booth-Beach, Yi Chen
+ * Date created: 20/05/2024
+ * Date modified: 27/05/2024
+ */
 package code.sensor;
 
 public class Engine extends Sensor {
@@ -15,12 +20,27 @@ public class Engine extends Sensor {
     public double getFuelFlow(){
         return this.fuelFlow;
     }
+
+    /**
+     * Gets current thrust
+     * @return
+     */
     public double getCurrThrust(){
         return this.currThrust;
     }
+
+    /**
+     * Sets fuel flow
+     * @param fuelFlow
+     */
     public void setFuelFlow(double fuelFlow){
         this.fuelFlow = fuelFlow;
     }
+
+    /**
+     * Sets current thrust
+     * @param thrust
+     */
     public void setCurrThrust(double thrust){
         this.currThrust = thrust;
     }
