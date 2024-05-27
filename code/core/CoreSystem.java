@@ -21,7 +21,7 @@ import code.ui.SensorDataDisplay;
 /*
  * Code made by: Yi Chen
  * Date created: 17/05/2024
- * Date modified: 22/05/2024
+ * Date modified: 25/05/2024
  */
 public class CoreSystem {
     private ScheduledExecutorService executor;
@@ -31,18 +31,13 @@ public class CoreSystem {
     private List <Sensor> altitudeSensors;
     private List <Sensor> airspeedSensors;
     private Engine [] engines = new Engine[2];
-
+    private ControlSurface controlSurfaceOne;
+    private ControlSurface controlSurfaceTwo;
    /**
     * Creates a core system object
-    * This avionic system is based of the Airbus A350.
+    * This avionic system is based of the Airbus A320.
     */
     public CoreSystem(){
-        
-    }   
-    /**
-     * Starts the whole system, and intializes many of the components.
-     */
-    public void start() {
         //Note: this intialization will result in an error and doesn't
         //comply with rule 9 of the power of 10 rules
         //This is beacuse of the way pilotuserinterface was designed, as 
@@ -51,7 +46,7 @@ public class CoreSystem {
         this.attitudeSensors = new ArrayList <>();
         this.altitudeSensors = new ArrayList <>();
         this.airspeedSensors = new ArrayList <>();
-        //A350 has two engines.
+        //A320 has two engines.
         for (int i = 0; i < 2; i++){
             this.engines[i] = new Engine(0, 0);
         }
@@ -61,9 +56,17 @@ public class CoreSystem {
             this.airspeedSensors.add(new AirspeedSensor());
             this.altitudeSensors.add(new AltitudeSensor(0, 0));
         }
-        this.autoPilotSystem = new AutoPilotSystem(new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2)), new EngineControlSystem(this.engines[0], this.engines[1]), true);
-        this.backupAutoPilotSystem = new AutoPilotSystem(new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2)), new EngineControlSystem(this.engines[0], this.engines[1]),false);
+        this.controlSurfaceOne = new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2));
+        this.controlSurfaceTwo = new ControlSurface(this.attitudeSensors.get(0), this.attitudeSensors.get(1), this.attitudeSensors.get(2));
+        this.autoPilotSystem = new AutoPilotSystem(this.controlSurfaceOne, new EngineControlSystem(this.engines[0], this.engines[1]), true);
+        this.backupAutoPilotSystem = new AutoPilotSystem(this.controlSurfaceTwo, new EngineControlSystem(this.engines[0], this.engines[1]),false);
         AutopilotControlPanel.addAutoPilotSystem(this.autoPilotSystem, this.backupAutoPilotSystem);
+    }   
+    /**
+     * Starts the whole system, and intializes many of the components.
+     */
+    public void start() {
+        
         //Make sure that fault detection and checking error in autopilot will be running
         //and also sensor updates should happen as specified in the handout.
         this.executor = Executors.newSingleThreadScheduledExecutor();
@@ -259,7 +262,20 @@ public class CoreSystem {
     public Engine[] getEngines(){
         return this.engines;
     }
-    
+    /**
+    * Gets the aircrafts autopilot system 
+    * @return autopilot system
+    */
+    public AutoPilotSystem getAutoPilotSystem(){
+        return this.autoPilotSystem;
+    }
+    /**
+    * Gets the aircrafts backup autopilot system 
+    * @return backup autopilot system
+    */
+    public AutoPilotSystem getbackUpAutoPilotSystem(){
+        return this.backupAutoPilotSystem;
+    }
 
     public static void main(String [] args){
         CoreSystem coreSystem = new CoreSystem();

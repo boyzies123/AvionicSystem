@@ -31,6 +31,7 @@ public class FlightPlanManagement extends JPanel{
     private static JTextField waypointYField;
     private static JTextField speedField;
     private static JTextField etaField;
+    private static JTextField altitudeField;
     private static JButton submitButton;
     private static JButton setFlightPlanButton;
     private final static int MIN_WAYPOINTS = 2;
@@ -43,6 +44,7 @@ public class FlightPlanManagement extends JPanel{
         waypointYField = new JTextField(10);
         speedField = new JTextField(5);
         etaField = new JTextField(10);
+        altitudeField = new JTextField(10);
         submitButton = new JButton("Submit");
         setFlightPlanButton = new JButton("Set Flight Plan");
 
@@ -59,11 +61,13 @@ public class FlightPlanManagement extends JPanel{
         panel.add(speedField);
         panel.add(new JLabel("ETA:"));
         panel.add(etaField);
+        panel.add(new JLabel("Altitude:"));
+        panel.add(altitudeField);
         panel.add(submitButton);
         panel.add(setFlightPlanButton);
 
         waypoints = new ArrayList<Waypoint>();
-        waypoints.add(new Waypoint(MapDisplay.STARTX, MapDisplay.STARTY, 0, 0));
+        waypoints.add(new Waypoint(MapDisplay.STARTX, MapDisplay.STARTY, 0, 0, 0));
     }
 
     public static JPanel getPanel() {
@@ -80,7 +84,8 @@ public class FlightPlanManagement extends JPanel{
             double yPos = Double.parseDouble(waypointYField.getText());
             double speedRes = Double.parseDouble(speedField.getText());
             double eta = Double.parseDouble(etaField.getText());
-            Waypoint waypoint = new Waypoint(xPos, yPos, speedRes, eta);
+            double altitude = Double.parseDouble(altitudeField.getText());
+            Waypoint waypoint = new Waypoint(xPos, yPos, speedRes, eta, altitude);
             waypoints.add(waypoint);
             MapDisplay.setWaypoints(waypoints);
             MapDisplay.displayWaypoints();
@@ -89,6 +94,7 @@ public class FlightPlanManagement extends JPanel{
             waypointYField.setText("");
             speedField.setText("");
             etaField.setText("");
+            altitudeField.setText("");
         }
         attempts++;
     }
