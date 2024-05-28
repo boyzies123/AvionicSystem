@@ -59,8 +59,8 @@ public class EngineControlSystem {
     double engOneThrust = this.engines[0].getCurrThrust();
     double engOneFuelFlow = this.engines[0].getFuelFlow();
     double engTwoThrust = this.engines[1].getCurrThrust();
-    double engTwoFuelFlow = this.engines[1].getCurrThrust();
-    this.sensorData = new SensorData(engOneThrust, engOneFuelFlow, engTwoThrust, engTwoFuelFlow);
+    double engTwoFuelFlow = this.engines[1].getFuelFlow();
+    this.sensorData = new SensorData(engOneFuelFlow, engOneThrust, engTwoFuelFlow, engTwoThrust);
         
   }
   /**.
@@ -114,4 +114,4 @@ public class EngineControlSystem {
   public double getFuelFlowTwo() {
     return this.fuelFlowTwo;
   }
- }
+}
