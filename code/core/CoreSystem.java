@@ -1,4 +1,5 @@
 package code.core;
+
 import code.autopilot.AutoPilotSystem;
 import code.autopilot.ControlSurface;
 import code.autopilot.EngineControlSystem;
@@ -7,6 +8,7 @@ import code.sensor.AltitudeSensor;
 import code.sensor.AttitudeSensor;
 import code.sensor.Engine;
 import code.sensor.Sensor;
+import code.src.Initialisation;
 import code.ui.AutopilotControlPanel;
 import code.ui.PilotUserInterface;
 import code.ui.SensorDataDisplay;
@@ -83,9 +85,9 @@ public class CoreSystem {
     EngineControlSystem engConSystem1 = new EngineControlSystem(this.engines[0], this.engines[1]);
     this.controlSurfaceOne = new ControlSurface(attSensorOne, attSensorTwo, attSensorThree);
     this.controlSurfaceTwo = new ControlSurface(attSensorOne, attSensorTwo, attSensorThree);
-    this.autoPilotSystem = new AutoPilotSystem(this.controlSurfaceOne, engConSystem1, true);
+    this.autoPilotSystem = new AutoPilotSystem(this.controlSurfaceOne, engConSystem1, true, false);
     EngineControlSystem engConSystem2 = new EngineControlSystem(this.engines[0], this.engines[1]);
-    this.backupAutoPilotSystem = new AutoPilotSystem(this.controlSurfaceTwo, engConSystem2, false);
+    this.backupAutoPilotSystem = new AutoPilotSystem(this.controlSurfaceTwo, engConSystem2, false, false);
     AutopilotControlPanel.addAutoPilotSystem(this.autoPilotSystem, this.backupAutoPilotSystem);
   }
   /**.
