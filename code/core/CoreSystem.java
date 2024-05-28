@@ -82,12 +82,12 @@ public class CoreSystem {
     Sensor attSensorOne = this.attitudeSensors.get(0);
     Sensor attSensorTwo = this.attitudeSensors.get(1);
     Sensor attSensorThree = this.attitudeSensors.get(2);
-    EngineControlSystem engConSystem1 = new EngineControlSystem(this.engines[0], this.engines[1]);
+    EngineControlSystem enCoSy1 = new EngineControlSystem(this.engines[0], this.engines[1]);
     this.controlSurfaceOne = new ControlSurface(attSensorOne, attSensorTwo, attSensorThree);
     this.controlSurfaceTwo = new ControlSurface(attSensorOne, attSensorTwo, attSensorThree);
-    this.autoPilotSystem = new AutoPilotSystem(this.controlSurfaceOne, engConSystem1, true, false);
-    EngineControlSystem engConSystem2 = new EngineControlSystem(this.engines[0], this.engines[1]);
-    this.backupAutoPilotSystem = new AutoPilotSystem(this.controlSurfaceTwo, engConSystem2, false, false);
+    this.autoPilotSystem = new AutoPilotSystem(this.controlSurfaceOne, enCoSy1, true, false);
+    EngineControlSystem enCoSy2 = new EngineControlSystem(this.engines[0], this.engines[1]);
+    this.backupAutoPilotSystem = new AutoPilotSystem(this.controlSurfaceTwo, enCoSy2, false, false);
     AutopilotControlPanel.addAutoPilotSystem(this.autoPilotSystem, this.backupAutoPilotSystem);
   }
   /**.
@@ -250,7 +250,7 @@ public class CoreSystem {
   public void scheduleAltitudeSensorUpdate() {
     for (Sensor sensor : this.altitudeSensors) {
       ((AltitudeSensor) sensor).setCurrAltitudeBarometric(0);
-      ((AltitudeSensor) sensor).setCurrAltitudeGPS(0);
+      ((AltitudeSensor) sensor).setCurrAltitudeGps(0);
     }
   }
   /**.
