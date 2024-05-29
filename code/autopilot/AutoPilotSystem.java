@@ -1,15 +1,15 @@
 package code.autopilot;
 
-
+import code.sensor.SensorData;
+import code.src.Waypoint;
+import code.ui.FlightPlanManagement;
+import code.ui.HazardAlertsDisplay;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import code.sensor.SensorData;
-import code.src.Waypoint;
-import code.ui.FlightPlanManagement;
-import code.ui.HazardAlertsDisplay;
+
 
 /*
  * Code made by: Yi Chen
@@ -30,8 +30,8 @@ public class AutoPilotSystem {
   //Engine control system
   private EngineControlSystem enConSys;
   private final long coFq = 500; // control frequency in milliseconds
-  private final double moeControlSurfaces = 0.02;
-  private final double moeEngineParameters = 0.05;
+  private final double moeControlSurfaces = 2;
+  private final double moeEngineParameters = 5;
   private final int maxRetries = 3;
   //whether autopilot is enaged or not
   private boolean engage = false;
@@ -51,19 +51,24 @@ public class AutoPilotSystem {
   /**
    * Creates an AutoPilotSystem object with a given control surface.
    *
-   * @param controlSurf The control surface of this aircraft where autopilot will send 
+   * @param coSurf The control surface of this aircraft where autopilot will send 
    control signals to.
-   * @param enConSys The engine control system of this aircraft where autopilot will send 
+   * @param enCoSys The engine control system of this aircraft where autopilot will send 
    control signals to.
-   * @param active Whether this autopilotsystem is active or nor
+   * @param a Whether this autopilotsystem is active or nor
+   * @param s Whether currently in simulation mode
    */
   
-  public AutoPilotSystem(ControlSurface controlSurf, EngineControlSystem enConSys, boolean active) {
-    this.active = active;
-    this.conSurf = controlSurf;
-    this.enConSys = enConSys;
+  public AutoPilotSystem(ControlSurface coSurf, EngineControlSystem enCoSys, boolean a, boolean s) {
+    this.active = a;
+    this.conSurf = coSurf;
+    this.enConSys = enCoSys;
     this.executor = Executors.newSingleThreadScheduledExecutor();
-    this.executor.scheduleAtFixedRate(this::sendControlSignal, 0, this.coFq, TimeUnit.MILLISECONDS);
+    this.simulation = s;
+    TimeUnit time = TimeUnit.MILLISECONDS;
+    if (!this.simulation) {
+      this.executor.scheduleAtFixedRate(this::sendControlSignal, 0, this.coFq, time);
+    }
 
   }
   /**
@@ -153,6 +158,7 @@ public class AutoPilotSystem {
       // 3 attempts reached. Alert the pilot via the user interface.
       if (this.retries == this.maxRetries) {
         this.retries = 0;
+	this.alertSent = true;
         alertUserInterface();
       }
     } 
@@ -210,7 +216,8 @@ public class AutoPilotSystem {
    */
   
   public static boolean valueCompare(double sensorData, double position, double moe) {
-    return Math.abs(sensorData - position) <= moe * position;
+    return Math.abs(sensorData - position) / (position) * 100 <= moe
+      && Math.abs(sensorData - position) / (position) * 100 >= -moe;
   }
   /**.
    * Calculate the pitch adjustment
@@ -288,7 +295,7 @@ public class AutoPilotSystem {
       return 0; // No change if no waypoints left
     }
     //Assuming waypoints are in order
-    Waypoint w = this.waypoints.remove(0);
+    Waypoint w = this.waypoints.get(0);
     return w.getSpeedRestriction();
 
   }
@@ -385,4 +392,15 @@ public class AutoPilotSystem {
   public boolean getAlertSent() {
     return this.alertSent;
   }
+ 
+  /**.
+   * Sets waypoints. For testing purposes
+   *
+   * @param w the list of waypoints to be added
+   * 
+   */
+  public void setWaypoints(List<Waypoint> w) {
+    this.waypoints.addAll(w);
+  }
+
 }

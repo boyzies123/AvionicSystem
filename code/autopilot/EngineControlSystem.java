@@ -28,6 +28,10 @@ public class EngineControlSystem {
   public EngineControlSystem(Engine e1, Engine e2) {
     this.engines[0] = e1;
     this.engines[1] = e2;
+    this.thrustOne = this.engines[0].getCurrThrust();
+    this.thrustTwo = this.engines[1].getCurrThrust();
+    this.fuelFlowOne = this.engines[0].getFuelFlow();
+    this.fuelFlowTwo = this.engines[1].getFuelFlow();
   }
   /**.
    * Send sensor data to autopilot system to verify execution of control signals
@@ -55,8 +59,8 @@ public class EngineControlSystem {
     double engOneThrust = this.engines[0].getCurrThrust();
     double engOneFuelFlow = this.engines[0].getFuelFlow();
     double engTwoThrust = this.engines[1].getCurrThrust();
-    double engTwoFuelFlow = this.engines[1].getCurrThrust();
-    this.sensorData = new SensorData(engOneThrust, engOneFuelFlow, engTwoThrust, engTwoFuelFlow);
+    double engTwoFuelFlow = this.engines[1].getFuelFlow();
+    this.sensorData = new SensorData(engOneFuelFlow, engOneThrust, engTwoFuelFlow, engTwoThrust);
         
   }
   /**.
@@ -110,4 +114,4 @@ public class EngineControlSystem {
   public double getFuelFlowTwo() {
     return this.fuelFlowTwo;
   }
- }
+}

@@ -16,6 +16,12 @@ public class PilotUserInterface extends JFrame{
     private JPanel mapPanel;
     
     public PilotUserInterface() {
+        
+    }
+    /**
+    * Creates and intializes all necessary components
+    */
+    public void start() {
         setTitle("Aircraft Pilot Interface");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -41,7 +47,6 @@ public class PilotUserInterface extends JFrame{
         pack();
         setVisible(true);
     }
-
     
     private void initializeVisualDisplayMap() {
         mapPanel = new JPanel();
