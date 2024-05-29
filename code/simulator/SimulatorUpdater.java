@@ -35,7 +35,7 @@ public class SimulatorUpdater implements Runnable {
                     ((AirspeedSensor)sensor).setCurrentAirspeed(instance.getValues().get(instance.getFieldNames().get(0)));
                 } 
                 else if (sensor instanceof AltitudeSensor) {
-                    ((AltitudeSensor)sensor).setCurrAltitudeGPS(instance.getValues().get(instance.getFieldNames().get(0)));
+                    ((AltitudeSensor)sensor).setCurrAltitudeGps(instance.getValues().get(instance.getFieldNames().get(0)));
                     ((AltitudeSensor)sensor).setCurrAltitudeBarometric(instance.getValues().get(instance.getFieldNames().get(1)));
                 }
                 else if (sensor instanceof AttitudeSensor) {
