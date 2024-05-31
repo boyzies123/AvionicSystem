@@ -144,7 +144,7 @@ public class IntegrationTesting {
     assertTrue(this.coreSystem.getAutoPilotSystem().errorInAutoPilot());
     this.coreSystem.checkErrorInAutoPilot();
     assertFalse(this.coreSystem.getAutoPilotSystem().checkActive());
-    assertTrue(this.coreSystem.getbackUpAutoPilotSystem().checkActive());
+    assertTrue(this.coreSystem.getBackUpAutoPilotSystem().checkActive());
         
   }
   /**.

@@ -331,7 +331,7 @@ public class CoreSystem {
    */
   
   public List<Sensor> getAttitudeSensors() {
-    return this.altitudeSensors;
+    return this.attitudeSensors;
   }
   /**.
    * Gets all engines of this system
@@ -357,7 +357,7 @@ public class CoreSystem {
    * @return backup autopilot system
    */
     
-  public AutoPilotSystem getbackUpAutoPilotSystem() {
+  public AutoPilotSystem getBackUpAutoPilotSystem() {
     return this.backupAutoPilotSystem;
   }
   /**.

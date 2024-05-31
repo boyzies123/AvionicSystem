@@ -67,7 +67,7 @@ public class SensorTest {
     @Test
     public void testGetCurrAltitudeGPS() {
         AltitudeSensor altitudeSensor = new AltitudeSensor(10000, 10000);
-        assertEquals(10000, altitudeSensor.getCurrAltitudeGPS(), 0.001);
+        assertEquals(10000, altitudeSensor.getCurrAltitudeGps(), 0.001);
     }
 
     /**
@@ -76,8 +76,8 @@ public class SensorTest {
     @Test
     public void testSetCurrAltitudeGPS() {
         AltitudeSensor altitudeSensor = new AltitudeSensor(10000, 10000);
-        altitudeSensor.setCurrAltitudeGPS(20000);
-        assertEquals(20000, altitudeSensor.getCurrAltitudeGPS(), 0.001);
+        altitudeSensor.setCurrAltitudeGps(20000);
+        assertEquals(20000, altitudeSensor.getCurrAltitudeGps(), 0.001);
     }
 
     /**
@@ -131,7 +131,7 @@ public class SensorTest {
     public void testAltitudeSendSensorData() {
         AltitudeSensor altitudeSensor = new AltitudeSensor(10000, 10000);
         SensorData sensorData = altitudeSensor.sendSensorData();
-        assertEquals(altitudeSensor.getCurrAltitudeGPS(), sensorData.getAltitudeGPS(), 0.001);
+        assertEquals(altitudeSensor.getCurrAltitudeGps(), sensorData.getAltitudeGps(), 0.001);
         assertEquals(altitudeSensor.getCurrAltitudeBarometric(), sensorData.getAltitudeBarometric(), 0.001);
     }
 
@@ -356,7 +356,7 @@ public class SensorTest {
     @Test
     public void testGetAltitude() {
         SensorData sensorData = new SensorData(0.0, 0.0, 0.0);
-        assertEquals(0, sensorData.getAltitudeGPS(), 0.001);
+        assertEquals(0, sensorData.getAltitudeGps(), 0.001);
     }
 
     /**
@@ -365,8 +365,8 @@ public class SensorTest {
     @Test
     public void testSetAltitude() {
         SensorData sensorData = new SensorData(0.0, 0.0, 0.0);
-        sensorData.setAltitudeGPS(20000);
-        assertEquals(20000, sensorData.getAltitudeGPS(), 0.001);
+        sensorData.setAltitudeGps(20000);
+        assertEquals(20000, sensorData.getAltitudeGps(), 0.001);
     }
 
     /**
@@ -375,7 +375,7 @@ public class SensorTest {
     @Test
     public void testGetAltitudeGPS() {
         SensorData sensorData = new SensorData(0.0, 0.0, 0.0);
-        assertEquals(0, sensorData.getAltitudeGPS(), 0.001);
+        assertEquals(0, sensorData.getAltitudeGps(), 0.001);
     }
 
     /**
@@ -384,8 +384,8 @@ public class SensorTest {
     @Test
     public void testSetAltitudeGPS() {
         SensorData sensorData = new SensorData(0.0, 0.0, 0.0);
-        sensorData.setAltitudeGPS(20000);
-        assertEquals(20000, sensorData.getAltitudeGPS(), 0.001);
+        sensorData.setAltitudeGps(20000);
+        assertEquals(20000, sensorData.getAltitudeGps(), 0.001);
     }
 
     /**

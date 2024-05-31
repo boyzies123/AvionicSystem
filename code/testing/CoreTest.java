@@ -36,14 +36,13 @@ public class CoreTest {
     @Test
     public void testGetAttitudeSensors() {
         CoreSystem coreSystem = new CoreSystem();
-        List <Sensor> attitudeSensors = new ArrayList<>();
+        List<Sensor> attitudeSensors = new ArrayList<>();
         attitudeSensors.add(new AttitudeSensor(5, 5, 5));
         attitudeSensors.add(new AttitudeSensor(5, 5, 5));
         attitudeSensors.add(new AttitudeSensor(5, 5, 5));
-        coreSystem.setAttitudeSensors(attitudeSensors);
+        coreSystem.setAttitudeSensors(attitudeSensors);        
         assertEquals(attitudeSensors, coreSystem.getAttitudeSensors());
     }
-
     /**
      * Test of getAirspeedSensors method
      */
@@ -72,7 +71,7 @@ public class CoreTest {
         attitudeSensors.add(new AttitudeSensor(5, 5, 5));
         attitudeSensors.add(new AttitudeSensor(5, 5, 5));
         ControlSurface controlSurface = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
-        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurface, new EngineControlSystem(engines[0], engines[1]), true);
+        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurface, new EngineControlSystem(engines[0], engines[1]), true, false);
         coreSystem.setAutoPilotSystem(autoPilotSystem);
         assertEquals(autoPilotSystem, coreSystem.getAutoPilotSystem());
     }
@@ -91,7 +90,7 @@ public class CoreTest {
         attitudeSensors.add(new AttitudeSensor(5, 5, 5));
         attitudeSensors.add(new AttitudeSensor(5, 5, 5));
         ControlSurface controlSurface = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
-        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurface, new EngineControlSystem(engines[0], engines[1]), true);
+        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurface, new EngineControlSystem(engines[0], engines[1]), true, false);
         coreSystem.setBackupAutoPilotSystem(backupAutoPilotSystem);
         assertEquals(backupAutoPilotSystem, coreSystem.getBackUpAutoPilotSystem());
     }
@@ -263,8 +262,8 @@ public class CoreTest {
         attitudeSensors.remove(2);
         attitudeSensors.add(new AttitudeSensor(10, 10, 10));
         ControlSurface controlSurfaceTwo = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
-        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(engines[0], engines[1]), true);
-        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(engines[0], engines[1]),false);
+        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(engines[0], engines[1]), true, false);
+        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(engines[0], engines[1]),false, false);
         coreSystem.setAutoPilotSystem(autoPilotSystem);
         coreSystem.setBackupAutoPilotSystem(backupAutoPilotSystem);
         coreSystem.checkErrorInAutoPilot();
@@ -290,8 +289,8 @@ public class CoreTest {
         attitudeSensors.remove(2);
         attitudeSensors.add(new AttitudeSensor(15, 15, 15));
         ControlSurface controlSurfaceTwo = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
-        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(engines[0], engines[1]), false);
-        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(engines[0], engines[1]),true);
+        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(engines[0], engines[1]), false, false);
+        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(engines[0], engines[1]),true, false);
         coreSystem.setAutoPilotSystem(autoPilotSystem);
         coreSystem.setBackupAutoPilotSystem(backupAutoPilotSystem);
         coreSystem.checkErrorInAutoPilot();
@@ -315,8 +314,8 @@ public class CoreTest {
         attitudeSensors.add(new AttitudeSensor(15, 15, 15));
         ControlSurface controlSurfaceOne = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
         ControlSurface controlSurfaceTwo = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
-        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(engines[0], engines[1]), true);
-        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(engines[0], engines[1]),true);
+        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(engines[0], engines[1]), true, false);
+        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(engines[0], engines[1]),true, false);
         coreSystem.setAutoPilotSystem(autoPilotSystem);
         coreSystem.setBackupAutoPilotSystem(backupAutoPilotSystem);
         coreSystem.checkErrorInAutoPilot();
