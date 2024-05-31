@@ -1,18 +1,25 @@
 package code.src;
 
 /*
+ * Waypoint class.
+ * Represents an individual Waypoint object,
+ * containing the waypoint's coordinates,
+ * it's speed restrictions (if any),
+ * and its estimated time of arrival (ETA).
+ * 
  * Code made by: James McKenzie
  * Date created: 17/05/2024
- * Date modified: (if modified)
+ * Date modified: 27/05/2024
  */
 public class Waypoint {
     
+    // Instance variables for a waypoint
     private double xPos;
     private double yPos;
     private double speedRestriction;
     private double eta;
     private double altitude;
-
+    
     public double getEta() {
         return eta;
     }

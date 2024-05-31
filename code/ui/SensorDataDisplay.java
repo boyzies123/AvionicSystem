@@ -7,20 +7,24 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /*
+ * SensorDataDisplay class
+ * Contains all of the UI components that will display incoming sensor
+ * data to the pilot.
+ * 
  * Code made by: James McKenzie
  * Date created: 13/05/2024
  * Date modified: 27/05/2024
  */
 public class SensorDataDisplay{
 
-    private double airspeed;
+    /**private double airspeed;
     private double altitude;
     private double pitch;
     private double roll;
     private double yaw;
-    private double thrust;
+    private double thrust;**/
 
-
+    // Fields
     private static JPanel panel;
     private static JLabel airspeedLabel;
     private static JLabel altitudeLabel;
@@ -32,6 +36,9 @@ public class SensorDataDisplay{
     private static JLabel fuelLabel1;
     private static JLabel fuelLabel2;
 
+    /**
+     * Create and initialize all components of the panel.
+     */
     public static void initialize(){
         panel = new JPanel(new GridLayout(9,1));
         airspeedLabel = new JLabel("Airspeed: ");
@@ -56,6 +63,11 @@ public class SensorDataDisplay{
         panel.add(fuelLabel2);
     }
 
+    /**
+     * Allows other classes to access the JPanel itself,
+     * and therefore display the data on the panel.
+     * @return The panel
+     */
     public static JPanel getPanel() {
         return panel;
     }

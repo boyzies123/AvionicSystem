@@ -42,7 +42,7 @@ public class FlightPlanManagement{
     private static int attempts = 0;
 
     /**
-     * Initialize method
+     * Initializes all the components of the JPanel.
      */
     public static void initialize(){
         panel = new JPanel(new FlowLayout());
@@ -76,14 +76,30 @@ public class FlightPlanManagement{
         waypoints.add(new Waypoint(MapDisplay.STARTX, MapDisplay.STARTY, 0, 0, 0));
     }
 
+    /**
+     * Allows other classes to access the JPanel itself,
+     * and therefore make changes to the appearance of the 
+     * panel.
+     * @return The panel
+     */
     public static JPanel getPanel() {
         return panel;
     }
 
+    /**
+     * Allows the Map component of the UI to access
+     * the flight's waypoints and display them.
+     * @return A list of Waypoint objects
+     */
     public static List<Waypoint> getWaypoints() {
         return waypoints;
     }
 
+    /**
+     * Creates a new Waypoint object with the details entered by the pilot
+     * in the text fields, adds it to the list of Waypoints,
+     * and passes the list on to the Map component.
+     */
     public static void submitDetails(){
         if (attempts <= MAX_WAYPOINTS){
             double xPos = Double.parseDouble(waypointXField.getText());
@@ -104,6 +120,10 @@ public class FlightPlanManagement{
         attempts++;
     }
 
+    /**
+     * Finalizes the flight plan - disables all of this panel's buttons
+     * and enables the autopilot and manual override controls.
+     */
     public static void loadFlightPlan(){
         if (waypoints.size() >= MIN_WAYPOINTS){
             submitButton.setEnabled(false);

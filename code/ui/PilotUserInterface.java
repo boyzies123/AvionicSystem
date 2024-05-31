@@ -5,6 +5,10 @@ import java.awt.*;
 
 
 /*
+ * PilotUserInterface
+ * This is the main frame that contains all of the individual components
+ * of the system's user interface.
+ * 
  * Code made by: James McKenzie
  * Date created: 13/05/2024
  * Date modified: 20/05/2024
@@ -13,10 +17,10 @@ public class PilotUserInterface extends JFrame{
 
     
     // Visual Display Map
-    private JPanel mapPanel;
+    //private JPanel mapPanel;
     
     public PilotUserInterface() {
-        
+        //start();
     }
     /**
     * Creates and intializes all necessary components
@@ -47,15 +51,12 @@ public class PilotUserInterface extends JFrame{
         pack();
         setVisible(true);
     }
-<<<<<<< HEAD
     
-    private void initializeVisualDisplayMap() {
+    /**private void initializeVisualDisplayMap() {
         mapPanel = new JPanel();
         mapPanel.setBorder(BorderFactory.createTitledBorder("Visual Display Map"));
         // Add map drawing functionality
     }
-=======
->>>>>>> abe9262 (Final tweaks to UI code)
 
     /**public MapDisplay getMapDisplay(){
         return this.mapPanel;
