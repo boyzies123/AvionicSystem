@@ -3,7 +3,6 @@ package code.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +11,10 @@ import javax.imageio.ImageIO;
 import code.src.Waypoint;
 
 /*
+ * MapPanel
+ * JPanel that graphically display's the plane's current location and the 
+ * flight plan entered by the pilot.
+ * 
  * Code made by: James McKenzie
  * Date created: 22/05/2024
  * Date modified: 22/05/2024
@@ -22,6 +25,12 @@ public class MapPanel extends JPanel{
     private List<Waypoint> waypoints;
     private BufferedImage mapImage;
 
+    /**
+     * Initialize the Map Panel.
+     * @param x
+     * @param y
+     * @param w
+     */
     public MapPanel(int x, int y, List<Waypoint> w) {
         // Initialize variables
         currentX = x;
@@ -35,12 +44,21 @@ public class MapPanel extends JPanel{
 
     }
 
+    /**
+     * Set current position of the plane on the map.
+     * @param x
+     * @param y
+     */
     public void setCurrentPosition(int x, int y) {
         currentX = x;
         currentY = y;
         repaint(); // Redraw the panel after updating position
     }
 
+    /**
+     * Set the current route entered by the pilot
+     * @param waypoints
+     */
     public void setWaypoints(List<Waypoint> waypoints) {
         this.waypoints = waypoints;
         System.out.println(waypoints.size());

@@ -8,28 +8,30 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import code.autopilot.AutoPilotSystem;
 
 
 /*
+ * Autopilot Control Panel
+ * This contains all the code allowing the pilot to engage and disengage the autopilot,
+ * and the controls for a manual override.
+ * 
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: 22/05/2024
+ * Date modified: 27/05/2024
  */
 public class AutopilotControlPanel{
 
-    private boolean autopilotStatus;
+    // Fields
+    /**private boolean autopilotStatus;
     private double altitude;
     private double speed;
     private double heading;
-    private boolean faultStatus;
-
+    private boolean faultStatus;**/
     private static AutoPilotSystem autoPilotSystem;
     private static AutoPilotSystem backupAutoPilotSystem;
-
     private static JPanel panel;
     private static JButton autopilotButton;
     private static JToggleButton manualOverrideButton;
@@ -38,6 +40,9 @@ public class AutopilotControlPanel{
     private static JSlider headingSlider;
     private static JLabel autopilotStatusLabel;
 
+    /**
+     * Initializes all the components of the control panel
+     */
     public static void initialize(){
         panel = new JPanel(new GridLayout(6,1));
         autopilotButton = new JButton("Engage Autopilot");
@@ -68,10 +73,19 @@ public class AutopilotControlPanel{
         panel.add(autopilotStatusLabel);
     }
 
+    /**
+     * Allows other classes to access the JPanel itself,
+     * and therefore make changes to the appearance of the 
+     * control panel.
+     * @return The panel
+     */
     public static JPanel getPanel(){
         return panel;
     }
 
+    /**
+     * Enables the controls (they are disabled by default at the start of a flight)
+     */
     public static void enableControls(){
         autopilotButton.setEnabled(true);
         altitudeSlider.setEnabled(true);
@@ -79,11 +93,20 @@ public class AutopilotControlPanel{
         headingSlider.setEnabled(true);
     }
 
+    /**
+     * Allows the control panel to access the main and backup 
+     * autopilot systems.
+     * @param aps
+     * @param baps
+     */
     public static void addAutoPilotSystem(AutoPilotSystem aps, AutoPilotSystem baps){
         autoPilotSystem = aps;
         backupAutoPilotSystem = baps;
     }
 
+    /**
+     * Starts the autopilot systems and disables controls for manual override.
+     */
     public static void engageAutoPilot(){
         autopilotButton.setBackground(Color.GREEN);
         // start autopilot
@@ -99,6 +122,9 @@ public class AutopilotControlPanel{
 
     }
 
+    /**
+     * Disables the autopilot systems and enables controls for manual override.
+     */
     public static void disengageAutoPilot(){
         autoPilotSystem.stop();
         backupAutoPilotSystem.stop();
@@ -130,6 +156,7 @@ public class AutopilotControlPanel{
     }
 
     public static void displayIndicatorLights(){
+
 
     }
     
