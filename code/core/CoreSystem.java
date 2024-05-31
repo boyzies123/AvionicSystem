@@ -12,6 +12,9 @@ import code.src.Initialisation;
 import code.ui.AutopilotControlPanel;
 import code.ui.PilotUserInterface;
 import code.ui.SensorDataDisplay;
+
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -39,7 +42,7 @@ public class CoreSystem {
   private Engine [] engines = new Engine[2];
   private ControlSurface controlSurfaceOne;
   private ControlSurface controlSurfaceTwo;
-  private List<String> faults = new ArrayList<>();
+  private static List<String> faults = new ArrayList<>();
   /**.
    * Creates a core system object
    * This avionic system is based of the Airbus A320.
@@ -122,6 +125,7 @@ public class CoreSystem {
   }
   /**.
    * Checks for error in autopilot and switch autopilot if error does exist.
+   * 
    */
   
   public void checkErrorInAutoPilot() {
@@ -152,7 +156,6 @@ public class CoreSystem {
       return v1;
     } else if (v2 == v3) {
       return v2;
-    
     } else {
       return -9999;
     }
@@ -167,9 +170,9 @@ public class CoreSystem {
     double speedAirSpSen1 = ((AirspeedSensor) this.airspeedSensors.get(0)).getCurrentAirspeed();
     double speedAirSpSen2 = ((AirspeedSensor) this.airspeedSensors.get(1)).getCurrentAirspeed();
     double speedAirSpSen3 = ((AirspeedSensor) this.airspeedSensors.get(2)).getCurrentAirspeed();
-    double altAltSensor1 = ((AltitudeSensor) this.attitudeSensors.get(0)).getCombinedAltitude();
-    double altAltSensor2 = ((AltitudeSensor) this.attitudeSensors.get(1)).getCombinedAltitude();
-    double altAltSensor3 = ((AltitudeSensor) this.attitudeSensors.get(2)).getCombinedAltitude();
+    double altAltSensor1 = ((AltitudeSensor) this.altitudeSensors.get(0)).getCombinedAltitude();
+    double altAltSensor2 = ((AltitudeSensor) this.altitudeSensors.get(1)).getCombinedAltitude();
+    double altAltSensor3 = ((AltitudeSensor) this.altitudeSensors.get(2)).getCombinedAltitude();
     double pitchAttSensor1 = ((AttitudeSensor) this.attitudeSensors.get(0)).getCurrPitch();
     double pitchAttSensor2 = ((AttitudeSensor) this.attitudeSensors.get(1)).getCurrPitch();
     double pitchAttSensor3 = ((AttitudeSensor) this.attitudeSensors.get(2)).getCurrPitch();
@@ -216,7 +219,7 @@ public class CoreSystem {
    */
     
   public static void handleFaults(boolean aiF, boolean alF, boolean piF, boolean roF, boolean yaF) {
-    List<String> faults = new ArrayList<>();
+    faults = new ArrayList<>();
     if (aiF) {
       faults.add("Airspeed sensor fault detected."); //$NON-NLS-1$
     }
@@ -367,7 +370,7 @@ public class CoreSystem {
    */
   
   public List<String> getFaults() {
-    return this.faults;
+    return faults;
   }
 
   /**.

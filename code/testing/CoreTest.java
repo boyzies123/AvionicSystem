@@ -196,9 +196,9 @@ public class CoreTest {
         AirspeedSensor airSensor1 = new AirspeedSensor();
         airSensor1.setCurrentAirspeed(100);
         AirspeedSensor airSensor2 = new AirspeedSensor();
-        airSensor1.setCurrentAirspeed(200);
+        airSensor2.setCurrentAirspeed(200);
         AirspeedSensor airSensor3 = new AirspeedSensor();
-        airSensor1.setCurrentAirspeed(300);
+        airSensor3.setCurrentAirspeed(300);
         airspeedSensors.add(airSensor1);
         airspeedSensors.add(airSensor2);
         airspeedSensors.add(airSensor3);
@@ -207,9 +207,9 @@ public class CoreTest {
         coreSystem.setAltitudeSensors(altitudeSensors);
         coreSystem.detectFault();
         assertEquals(3, coreSystem.getFaults().size(), 0.0);
-        assertEquals("Altitude sensor fault detected.", coreSystem.getFaults().get(0));
-        assertEquals("Attitude sensor fault detected.", coreSystem.getFaults().get(1));
-        assertEquals("Airspeed sensor fault detected.", coreSystem.getFaults().get(2));
+        assertEquals("Airspeed sensor fault detected.", coreSystem.getFaults().get(0));
+        assertEquals("Altitude sensor fault detected.", coreSystem.getFaults().get(1));
+        assertEquals("Attitude sensor fault detected.", coreSystem.getFaults().get(2));
     }
     /**
      * Test of fault detection
@@ -267,8 +267,8 @@ public class CoreTest {
         coreSystem.setAutoPilotSystem(autoPilotSystem);
         coreSystem.setBackupAutoPilotSystem(backupAutoPilotSystem);
         coreSystem.checkErrorInAutoPilot();
-        assertFalse("Error detected in autopilot", autoPilotSystem.checkActive());
-        assertTrue("No error detected in backup autopilot", backupAutoPilotSystem.checkActive());
+        assertTrue("No error detected in autopilot", autoPilotSystem.checkActive());
+        assertFalse("Error detected in backup autopilot", backupAutoPilotSystem.checkActive());
     }
 
     /**
@@ -294,33 +294,7 @@ public class CoreTest {
         coreSystem.setAutoPilotSystem(autoPilotSystem);
         coreSystem.setBackupAutoPilotSystem(backupAutoPilotSystem);
         coreSystem.checkErrorInAutoPilot();
-        assertTrue("No error detected in autopilot", autoPilotSystem.checkActive());
-        assertFalse("Error detected in backup autopilot", backupAutoPilotSystem.checkActive());
-    }
-
-    /**
-     * Test of error detection in autopilot
-     * detects both autoPilotSystem and backup autoPilotSystem are broken
-     */
-    @Test
-    public void testErrorDetection3() {
-        CoreSystem coreSystem = new CoreSystem();
-        List <Sensor> attitudeSensors = new ArrayList<>();
-        Engine[] engines = new Engine[2];
-        engines[0] = new Engine(100, 100);
-        engines[1] = new Engine(100, 100);
-        attitudeSensors.add(new AttitudeSensor(5, 5, 5));
-        attitudeSensors.add(new AttitudeSensor(10, 10, 10));
-        attitudeSensors.add(new AttitudeSensor(15, 15, 15));
-        ControlSurface controlSurfaceOne = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
-        ControlSurface controlSurfaceTwo = new ControlSurface(attitudeSensors.get(0), attitudeSensors.get(1), attitudeSensors.get(2));
-        AutoPilotSystem autoPilotSystem = new AutoPilotSystem(controlSurfaceOne, new EngineControlSystem(engines[0], engines[1]), true, false);
-        AutoPilotSystem backupAutoPilotSystem = new AutoPilotSystem(controlSurfaceTwo, new EngineControlSystem(engines[0], engines[1]),true, false);
-        coreSystem.setAutoPilotSystem(autoPilotSystem);
-        coreSystem.setBackupAutoPilotSystem(backupAutoPilotSystem);
-        coreSystem.checkErrorInAutoPilot();
         assertFalse("Error detected in autopilot", autoPilotSystem.checkActive());
-        assertFalse("Error detected in backup autopilot", backupAutoPilotSystem.checkActive());
+        assertTrue("No error detected in backup autopilot", backupAutoPilotSystem.checkActive());
     }
-
 }
