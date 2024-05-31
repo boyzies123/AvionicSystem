@@ -1,10 +1,11 @@
 package code.autopilot;
 
-import java.util.ArrayList;
-import java.util.List;
 import code.sensor.AttitudeSensor;
 import code.sensor.Sensor;
 import code.sensor.SensorData;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 /*
@@ -91,7 +92,25 @@ public class ControlSurface {
     if (sensorData2.equals(sensorData3)) {
       return sensorData2;
     }
-        
+    if ((sensorData1.getAirspeed() == sensorData2.getAirspeed()
+        && sensorData1.getAltitude() == sensorData2.getAltitude()
+        && sensorData1.getYaw() == sensorData2.getYaw()
+        && sensorData1.getPitch() == sensorData2.getPitch()
+        && sensorData1.getRoll() == sensorData2.getRoll())
+        || (sensorData1.getAirspeed() == sensorData3.getAirspeed()
+        && sensorData1.getAltitude() == sensorData3.getAltitude()
+        && sensorData1.getYaw() == sensorData3.getYaw()
+        && sensorData1.getPitch() == sensorData3.getPitch()
+        && sensorData1.getRoll() == sensorData3.getRoll())) {
+      return sensorData1;
+    }
+    if (sensorData2.getAirspeed() == sensorData3.getAirspeed()
+        && sensorData2.getAltitude() == sensorData3.getAltitude()
+        && sensorData2.getYaw() == sensorData3.getYaw()
+        && sensorData2.getPitch() == sensorData3.getPitch()
+        && sensorData2.getRoll() == sensorData3.getRoll()) {
+      return sensorData2;
+    }
     throw new IllegalStateException("No majority agreement among the sensors"); //$NON-NLS-1$
     
   }
@@ -100,10 +119,15 @@ public class ControlSurface {
    * Send sensor data to autopilot system to verify execution of control signals
    */
   public SensorData sendSensorData() {
-    updateFromSensorData();
-    SensorData sd = getMajorityVote();
-
-    return sd;
+    try {
+      updateFromSensorData();
+      SensorData sd = getMajorityVote();
+      return sd;
+    } catch (IllegalStateException e) {
+      e.printStackTrace();
+      return new SensorData(-9999, -9999, -9999);
+    }
+    
   }
     
   /**.
