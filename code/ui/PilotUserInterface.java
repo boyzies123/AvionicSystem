@@ -47,12 +47,15 @@ public class PilotUserInterface extends JFrame{
         pack();
         setVisible(true);
     }
+<<<<<<< HEAD
     
     private void initializeVisualDisplayMap() {
         mapPanel = new JPanel();
         mapPanel.setBorder(BorderFactory.createTitledBorder("Visual Display Map"));
         // Add map drawing functionality
     }
+=======
+>>>>>>> abe9262 (Final tweaks to UI code)
 
     /**public MapDisplay getMapDisplay(){
         return this.mapPanel;

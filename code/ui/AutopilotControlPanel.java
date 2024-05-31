@@ -8,16 +8,19 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import code.autopilot.AutoPilotSystem;
 
 
 /*
+ * Autopilot Control Panel
+ * This contains all the code allowing the pilot to engage and disengage the autopilot,
+ * and the controls for a manual override.
+ * 
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: 22/05/2024
+ * Date modified: 27/05/2024
  */
 public class AutopilotControlPanel{
 
@@ -130,6 +133,7 @@ public class AutopilotControlPanel{
     }
 
     public static void displayIndicatorLights(){
+
 
     }
     

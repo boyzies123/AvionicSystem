@@ -3,18 +3,15 @@ package code.ui;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JToggleButton;
 
 /*
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: (if modified)
+ * Date modified: 27/05/2024
  */
-public class SensorDataDisplay extends JPanel{
+public class SensorDataDisplay{
 
     private double airspeed;
     private double altitude;
@@ -46,9 +43,6 @@ public class SensorDataDisplay extends JPanel{
         engineLabel2 = new JLabel("Engine 2 Thrust: ");
         fuelLabel1 = new JLabel("Engine 1 Fuel Flow: ");
         fuelLabel2 = new JLabel("Engine 2 Fuel Flow: ");
-
-        // Add action listeners for buttons
-        // autopilotButton.addActionListener(e -> engageAutoPilot());
 
         panel.setBorder(BorderFactory.createTitledBorder("Sensor Data Display"));
         panel.add(airspeedLabel);

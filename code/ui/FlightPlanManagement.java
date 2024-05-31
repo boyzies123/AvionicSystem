@@ -3,7 +3,6 @@ package code.ui;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,19 +13,23 @@ import javax.swing.JTextField;
 import code.src.Waypoint;
 
 /*
+ * Flight Plan Management Panel
+ * This contains all the code allowing the pilot to enter
+ * waypoints and load a flight plan.
+ * This component of the UI can only be used at the start
+ * of a flight - after the flight plan has been loaded
+ * all components become unclickable.
+ * 
  * Code made by: James McKenzie
  * Date created: 13/05/2024
- * Date modified: 22/05/2024
+ * Date modified: 27/05/2024
  */
-public class FlightPlanManagement extends JPanel{
+public class FlightPlanManagement{
 
+    // Static fields for FlightPlanManagement
     private static List<Waypoint> waypoints;
-
-    private Map<Waypoint, Double> speedRestrictions;
-    //private Waypoint[] waypoints;
+    //private static Map<Waypoint, Double> speedRestrictions;
     private static JPanel panel;
-
-
     private static JTextField waypointXField;
     private static JTextField waypointYField;
     private static JTextField speedField;
@@ -38,6 +41,9 @@ public class FlightPlanManagement extends JPanel{
     private final static int MAX_WAYPOINTS = 8;
     private static int attempts = 0;
 
+    /**
+     * Initialize method
+     */
     public static void initialize(){
         panel = new JPanel(new FlowLayout());
         waypointXField = new JTextField(10);
@@ -88,7 +94,6 @@ public class FlightPlanManagement extends JPanel{
             Waypoint waypoint = new Waypoint(xPos, yPos, speedRes, eta, altitude);
             waypoints.add(waypoint);
             MapDisplay.setWaypoints(waypoints);
-            MapDisplay.displayWaypoints();
 
             waypointXField.setText("");
             waypointYField.setText("");
@@ -101,7 +106,6 @@ public class FlightPlanManagement extends JPanel{
 
     public static void loadFlightPlan(){
         if (waypoints.size() >= MIN_WAYPOINTS){
-            //parentFrame.getMapDisplay().setWaypoints(waypoints);
             submitButton.setEnabled(false);
             setFlightPlanButton.setEnabled(false);
             AutopilotControlPanel.enableControls();

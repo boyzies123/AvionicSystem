@@ -4,13 +4,10 @@ import java.awt.GridLayout;
 import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSlider;
 import javax.swing.JTextArea;
-import javax.swing.JToggleButton;
 
 /*
  * Code made by: James McKenzie
@@ -21,7 +18,7 @@ public class HazardAlertsDisplay{
 
 
     private static JPanel panel;
-    private List<String> hazardWarnings;
+    // private List<String> hazardWarnings;
     // private Checklist emergencyChecklist;
 
     private static JLabel hazardAlertLabel;

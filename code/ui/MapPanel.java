@@ -3,7 +3,6 @@ package code.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
 import java.io.IOException;
